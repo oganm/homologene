@@ -2,7 +2,7 @@ Package: homologene
 Type: Package
 Title: Quick access to homology information
 Version: 1.0
-Depends: parallel
+Depends: dplyr
 Suggests: testthat
 Date: 2015-06-16
 Author: Ogan Mancarci
