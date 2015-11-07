@@ -27,5 +27,5 @@ homologene(c('Eno2','Mog'), inTax = 10090, outTax = 9606)
 
 mouse2human(c('Eno2','Mog'))
 
-human2mouse(c('ENO2',MOG'))
+human2mouse(c('ENO2','MOG'))
 ```
