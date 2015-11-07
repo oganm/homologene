@@ -4,7 +4,7 @@ Title: Quick access to homology information
 Version: 1.0
 Depends: dplyr
 Suggests: testthat
-Date: 2015-06-16
+Date: 2015-11-06
 Author: Ogan Mancarci
 Maintainer: Ogan Mancarci <ogan.mancarci@gmail.com>
 Description: A pre-parsed version of homologene file from NCBI for easy access to homology information
