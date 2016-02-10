@@ -14,7 +14,13 @@ homologene = function(genes, inTax, outTax){
         select(HID,Gene.Symbol)
     names(out2)[2] = outTax
     
-    return(merge(out,out2) %>% select(2:3))
+    output = merge(out,out2) %>% select(2:3)
+    # preserve order
+    order = match(genes, output[,1])
+    order = order[!is.na(order)]
+    output = output[order,]
+    
+    return(output)
 }
 
 #' Mouse/human wraper for homologene
