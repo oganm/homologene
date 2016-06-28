@@ -15,10 +15,11 @@ homologene = function(genes, inTax, outTax){
     names(out2)[2] = outTax
     
     output = merge(out,out2) %>% select(2:3)
-    # preserve order
-    order = match(genes, output[,1])
-    order = order[!is.na(order)]
-    output = output[order,]
+
+    # preserve order with temporary column
+    output$sortBy <- factor(output[,1], levels = genes)
+    output <- arrange(output, sortBy)
+    output$sortBy <- NULL
     
     return(output)
 }
