@@ -5,6 +5,7 @@
 #' @param outTax taxid of the species that you are seeking homology
 #' @export
 homologene = function(genes, inTax, outTax){
+    genes <- unique(genes) #remove duplicates
     out = homologeneData %>% 
         filter(Taxonomy %in% inTax & Gene.Symbol %in% genes) %>%
         select(HID,Gene.Symbol)
