@@ -5,20 +5,22 @@
 #' @param outTax taxid of the species that you are seeking homology
 #' @export
 homologene = function(genes, inTax, outTax){
+    genes <- unique(genes) #remove duplicates
     out = homologeneData %>% 
         filter(Taxonomy %in% inTax & Gene.Symbol %in% genes) %>%
-        select(HID,Gene.Symbol)
+        dplyr::select(HID,Gene.Symbol)
     names(out)[2] = inTax
     
     out2 = homologeneData %>%  filter(Taxonomy %in% outTax & HID %in% out$HID) %>%
-        select(HID,Gene.Symbol)
+      dplyr::select(HID,Gene.Symbol)
     names(out2)[2] = outTax
     
-    output = merge(out,out2) %>% select(2:3)
-    # preserve order
-    order = match(genes, output[,1])
-    order = order[!is.na(order)]
-    output = output[order,]
+    output = merge(out,out2) %>% dplyr::select(2:3)
+
+    # preserve order with temporary column
+    output$sortBy <- factor(output[,1], levels = genes)
+    output <- arrange(output, sortBy)
+    output$sortBy <- NULL
     
     return(output)
 }
