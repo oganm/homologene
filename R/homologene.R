@@ -6,12 +6,12 @@
 #' @export
 homologene = function(genes, inTax, outTax){
     genes <- unique(genes) #remove duplicates
-    out = homologeneData %>% 
+    out = homologene::homologeneData %>% 
         dplyr::filter(Taxonomy %in% inTax & Gene.Symbol %in% genes) %>%
         dplyr::select(HID,Gene.Symbol)
     names(out)[2] = inTax
     
-    out2 = homologeneData %>%  dplyr::filter(Taxonomy %in% outTax & HID %in% out$HID) %>%
+    out2 = homologene::homologeneData %>%  dplyr::filter(Taxonomy %in% outTax & HID %in% out$HID) %>%
       dplyr::select(HID,Gene.Symbol)
     names(out2)[2] = outTax
     
