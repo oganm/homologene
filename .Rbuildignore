@@ -1,0 +1,6 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.httr-oauth$
+^\.travis\.yml$
+^data-raw$
+^process

@@ -6,6 +6,9 @@
 \usage{
 mouse2human(genes)
 }
+\arguments{
+\item{genes}{A vector of gene symbols}
+}
 \description{
 Mouse/human wraper for homologene
 }
