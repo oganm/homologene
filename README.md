@@ -1,4 +1,6 @@
 # homologene
+[![Build Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene)[![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene)
+
 An r package that works as a wrapper to homologene
 
 Available species are
