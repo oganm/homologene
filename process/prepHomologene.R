@@ -35,6 +35,8 @@ if(homologeneVersion!=readLines('data-raw/release')){
     write.table(homologeneData,file = 'data-raw/homologeneData.tsv',sep='\t', row.names=FALSE)
     devtools::use_data(homologeneData, overwrite= TRUE)
     devtools::use_data(homologeneVersion, overwrite= TRUE)
+    writeLines(releaseNo,con = 'data-raw/release')
+    
     repo = repository('.')
     git2r::add(repo,'data/homologeneData.rda')
     git2r::add(repo,'data/homologeneVersion.rda')
@@ -46,9 +48,6 @@ if(homologeneVersion!=readLines('data-raw/release')){
     pass = readLines('data-raw/auth')
     cred = git2r::cred_user_pass('OganM',pass)
     git2r::push(repo,credentials = cred)
-    
-    writeLines(releaseNo,con = 'data-raw/release')
-    
 }
 
 
