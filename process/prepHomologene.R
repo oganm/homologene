@@ -42,7 +42,11 @@ if(homologeneVersion!=readLines('data-raw/release')){
     git2r::add(repo,'man/homologeneData.Rd')
     git2r::add(repo,'data-raw/release')
     git2r::commit(repo,message = paste('Automatic update to version',homologeneVersion))
-
+    
+    pass = readLines('data-raw/auth')
+    cred = git2r::cred_user_pass('OganM',pass)
+    git2r::push(repo,credentials = cred)
+    
     writeLines(releaseNo,con = 'data-raw/release')
     
 }
