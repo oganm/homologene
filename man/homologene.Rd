@@ -16,4 +16,3 @@ homologene(genes, inTax, outTax)
 \description{
 Given a list of genes and a taxid, returns a data frame inlcuding the genes and their corresponding homologues
 }
-

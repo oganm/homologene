@@ -12,4 +12,3 @@ mouse2human(genes)
 \description{
 Mouse/human wraper for homologene
 }
-

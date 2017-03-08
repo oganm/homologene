@@ -47,3 +47,6 @@ human2mouse = function(genes){
 
 #' List of gene homologues used by homologene functions
 "homologeneData"
+
+#' Version of homologene used
+"homologeneVersion"
