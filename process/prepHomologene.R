@@ -11,16 +11,6 @@ if(!file.exists('data-raw/taxdump/names.dmp')){
     dir.create('data-raw/taxdump', showWarnings = FALSE)
     untar('data-raw/taxtump.tar.gz',exdir = 'data-raw/taxdump/')
 }
-taxData = fread('data-raw/taxdump/names.dmp',data.table=FALSE)
-taxData = taxData[c(1,3,5,7)]
-names(taxData) = c('tax_id','name_txt','unique_name','name_class')
-taxData %<>% filter(name_txt %in% c('Homo sapiens',
-                                   'Mus musculus',
-                                   'Rattus norvegicus',
-                                   'Danio rerio',
-                                   'Caenorhabditis elegans',
-                                   'Drosophila melanogaster',
-                                   'Rhesus macaque'))
 
 
 
@@ -28,6 +18,19 @@ homologeneVersion = readLines('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/REL
 
 # if the release is new, update
 if(homologeneVersion!=readLines('data-raw/release')){
+    taxData = fread('data-raw/taxdump/names.dmp',data.table=FALSE)
+    taxData = taxData[c(1,3,5,7)]
+    names(taxData) = c('tax_id','name_txt','unique_name','name_class')
+    taxData %<>% filter(name_txt %in% c('Homo sapiens',
+                                        'Mus musculus',
+                                        'Rattus norvegicus',
+                                        'Danio rerio',
+                                        'Caenorhabditis elegans',
+                                        'Drosophila melanogaster',
+                                        'Rhesus macaque'))
+    
+    
+    
     download.file(url = "ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data", destfile = 'data-raw/homologene.data')
     homologene = fread('data-raw/homologene.data',sep ='\t',quote='',stringsAsFactors = FALSE,data.table = FALSE)
     names(homologene) = c('HID','Taxonomy','Gene.ID','Gene.Symbol','Protein.GI','Protein.Accession')
