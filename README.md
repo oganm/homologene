@@ -8,7 +8,6 @@ Available species are
 * Mus musculus
 * Rattus norvegicus
 * Danio rerio
-* Escherichia coli
 * Caenorhabditis elegans
 * Drosophila melanogaster
 * Rhesus macaque
