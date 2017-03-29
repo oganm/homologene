@@ -13,6 +13,7 @@ devtools::load_all()
 An r package that works as a wrapper to homologene
 
 Available species are
+
 * Homo sapiens
 * Mus musculus
 * Rattus norvegicus

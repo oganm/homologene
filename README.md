@@ -6,7 +6,15 @@ homologene
 
 An r package that works as a wrapper to homologene
 
-Available species are \* Homo sapiens \* Mus musculus \* Rattus norvegicus \* Danio rerio \* Caenorhabditis elegans \* Drosophila melanogaster \* Rhesus macaque
+Available species are
+
+-   Homo sapiens
+-   Mus musculus
+-   Rattus norvegicus
+-   Danio rerio
+-   Caenorhabditis elegans
+-   Drosophila melanogaster
+-   Rhesus macaque
 
 More species can be added on request
 
