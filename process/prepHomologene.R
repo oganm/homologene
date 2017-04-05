@@ -2,6 +2,7 @@ library(magrittr)
 library(dplyr)
 library(data.table)
 library(git2r)
+library(ogbox)
 devtools::use_data_raw()
 # taxes = read.table('ftp://ftp.ncbi.nlm.nih.gov/mmdb/pdbeast/tax.table',sep = '')
 
@@ -41,6 +42,12 @@ if(homologeneVersion!=readLines('data-raw/release')){
     writeLines(releaseNo,con = 'data-raw/release')
     
     repo = repository('.')
+    
+    version = getVersion()
+    version %<>% strsplit('\\.') %>% {.[[1]]}
+    setVersion(paste(version[1],version[2],homologeneVersion,sep='.'))
+    git2r::add(repo,path ='DESCRIPTION')
+    
     git2r::add(repo,'data/homologeneData.rda')
     git2r::add(repo,'data/homologeneVersion.rda')
     git2r::add(repo,'data-raw/homologeneData.tsv')

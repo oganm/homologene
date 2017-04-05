@@ -1,7 +1,7 @@
 Package: homologene
 Type: Package
 Title: Quick access to homology information
-Version: 1.0
+Version: 1.0.68
 Imports:
     dplyr,
     magrittr
