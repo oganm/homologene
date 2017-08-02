@@ -1,7 +1,8 @@
 context('homologene testing')
 
 test_that('Multiple orthologues',{
-    expect_that(human2mouse(c("GZMH"))$mouseGene,equals(c('Gzmd','Gzme','Gzmg','Gzmf')))
+    humanOrthos = human2mouse(c("GZMH"))
+    expect_that(humanOrthos$mouseGene,equals(c('Gzmd','Gzme','Gzmg','Gzmf')))
 })
 
 test_that('Regular functionality',{
