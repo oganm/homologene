@@ -10,7 +10,11 @@ test_that('Regular functionality',{
 })
 
 test_that('Other species',{
-    expect_equal(nrow(homologene('OGN', outTax = 9544, inTax = 9606)),1)
+    homoSubsets = homologene::taxData$tax_id %>% sapply(function(x){
+        homologene::homologeneData %>% subset(Taxonomy==x) %>% dim
+    })
+    expect_true(all(homoSubsets[1,]>100))
+    
 })
 
 test_that('Detached behaviour',{

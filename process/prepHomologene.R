@@ -22,13 +22,19 @@ if(homologeneVersion!=readLines('data-raw/release')){
     taxData = fread('data-raw/taxdump/names.dmp',data.table=FALSE)
     taxData = taxData[c(1,3,5,7)]
     names(taxData) = c('tax_id','name_txt','unique_name','name_class')
-    taxData %<>% filter(name_txt %in% c('Homo sapiens',
-                                        'Mus musculus',
-                                        'Rattus norvegicus',
-                                        'Danio rerio',
-                                        'Caenorhabditis elegans',
-                                        'Drosophila melanogaster',
-                                        'Macaca mulatta'))
+    speciesToAdd = c('Homo sapiens',
+                     'Mus musculus',
+                     'Rattus norvegicus',
+                     'Danio rerio',
+                     'Caenorhabditis elegans',
+                     'Drosophila melanogaster',
+                     'Macaca mulatta')
+    
+    taxData %<>% filter(name_txt %in% speciesToAdd)
+    
+    stopifnot(all(speciesToAdd %in% taxData$name_txt))
+    
+    
     devtools::use_data(taxData)
     
     
