@@ -28,8 +28,8 @@ if(homologeneVersion!=readLines('data-raw/release')){
                                         'Danio rerio',
                                         'Caenorhabditis elegans',
                                         'Drosophila melanogaster',
-                                        'Rhesus macaque'))
-    
+                                        'Macaca mulatta'))
+    devtools::use_data(taxData)
     
     
     download.file(url = "ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data", destfile = 'data-raw/homologene.data')
@@ -39,7 +39,7 @@ if(homologeneVersion!=readLines('data-raw/release')){
     write.table(homologeneData,file = 'data-raw/homologeneData.tsv',sep='\t', row.names=FALSE)
     devtools::use_data(homologeneData, overwrite= TRUE)
     devtools::use_data(homologeneVersion, overwrite= TRUE)
-    writeLines(releaseNo,con = 'data-raw/release')
+    writeLines(as.character(homologeneVersion),con = 'data-raw/release')
     
     repo = repository('.')
     
