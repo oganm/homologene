@@ -34,8 +34,10 @@ if(homologeneVersion!=readLines('data-raw/release')){
     
     stopifnot(all(speciesToAdd %in% taxData$name_txt))
     
+    taxData %<>% select('tax_id','name_txt')
     
-    devtools::use_data(taxData)
+    write.table(taxData,'data-raw/taxData.tsv',,sep='\t', row.names=FALSE,quote = FALSE)
+    devtools::use_data(taxData,overwrite = TRUE)
     
     
     download.file(url = "ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data", destfile = 'data-raw/homologene.data')
