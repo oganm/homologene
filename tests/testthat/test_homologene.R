@@ -21,6 +21,6 @@ test_that('Other species',{
 test_that('Detached behaviour',{
     detach("package:homologene", unload=TRUE)
     expect_that(homologene::mouse2human(c('Eno2','Mog'))$humanGene,equals(c('ENO2','MOG')))
-    expect_that(dim(homologene::mouse2human(c('lolwut'))), equals(c(0,2)))
+    expect_that(dim(homologene::human2mouse(c('lolwut'))), equals(c(0,2)))
 })
 
