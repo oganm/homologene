@@ -35,8 +35,6 @@ Basic homologene function requires a list of genes, and an `inTax` and an `outTa
 homologene(c('Eno2','Mog'), inTax = 10090, outTax = 9606)
 ```
 
-    ## Warning: package 'bindrcpp' was built under R version 3.3.3
-
     ##   10090 9606
     ## 1  Eno2 ENO2
     ## 2   Mog  MOG
@@ -66,4 +64,4 @@ human2mouse(c('ENO2','MOG','GZMH'))
 Mishaps
 =======
 
-If a you can't find a gene you are looking for perhaps it might have synonyms. See [geneSynonym](https://github.com/oganm/geneSynonym.git) package to find them. If you have other problems open an issue or send a mail.
+If a you can't find a gene you are looking for it may have synonyms. See [geneSynonym](https://github.com/oganm/geneSynonym.git) package to find them. If you have other problems open an issue or send a mail.
