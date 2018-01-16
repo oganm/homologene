@@ -7,7 +7,7 @@
 homologene(genes, inTax, outTax)
 }
 \arguments{
-\item{genes}{A vector of gene symbols}
+\item{genes}{A vector of gene symbols or NCBI ids}
 
 \item{inTax}{taxid of the species that the input genes are coming from}
 

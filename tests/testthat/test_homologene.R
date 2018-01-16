@@ -7,7 +7,7 @@ test_that('Multiple orthologues',{
 
 test_that('Regular functionality',{
     expect_that(mouse2human(c('Eno2','Mog'))$humanGene,equals(c('ENO2','MOG')))
-    expect_that(dim(mouse2human(c('lolwut'))), equals(c(0,2)))
+    expect_that(dim(mouse2human(c('lolwut'))), equals(c(0,4)))
 })
 
 test_that('Other species',{

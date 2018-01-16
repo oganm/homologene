@@ -7,7 +7,7 @@
 human2mouse(genes)
 }
 \arguments{
-\item{genes}{A vector of gene symbols}
+\item{genes}{A vector of gene symbols or NCBI ids}
 }
 \description{
 Human/mouse wraper for homologene

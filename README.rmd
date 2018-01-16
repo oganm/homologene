@@ -33,9 +33,11 @@ install_github('oganm/homologene')
 
 Usage
 ===========
-Basic homologene function requires a list of genes, and an `inTax` and an `outTax`. In this example, `inTax` is the taxon id of *mus musculus* while `outTax` is for humans.
+Basic homologene function requires a list of gene symbols or NCBI ids, and an `inTax` and an `outTax`. In this example, `inTax` is the taxon id of *mus musculus* while `outTax` is for humans.
 ```{r}
 homologene(c('Eno2','Mog'), inTax = 10090, outTax = 9606)
+
+homologene(c('Eno2','17441'), inTax = 10090, outTax = 9606)
 ```
 
 For mouse and humans two convenience functions exist that removes the need to provide taxonomic identifiers. Note that the column names are not the same as the `homologene` output.
@@ -46,4 +48,6 @@ human2mouse(c('ENO2','MOG','GZMH'))
 
 Mishaps
 =================
+As of version version 1.1.68, the output now includes NCBI ids. Since it doesn't change any of the existing column names or their order, this shouldn't cause problems in most use cases. If this is an issue for you plase notify me.
+
 If a you can't find a gene you are looking for it may have synonyms. See [geneSynonym](https://github.com/oganm/geneSynonym.git) package to find them. If you have other problems open an issue or send a mail.

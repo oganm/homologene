@@ -4,7 +4,7 @@
 \name{homologeneData}
 \alias{homologeneData}
 \title{List of gene homologues used by homologene functions}
-\format{An object of class \code{data.frame} with 97832 rows and 3 columns.}
+\format{An object of class \code{data.frame} with 114705 rows and 4 columns.}
 \usage{
 homologeneData
 }
