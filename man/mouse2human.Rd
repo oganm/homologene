@@ -12,3 +12,6 @@ mouse2human(genes)
 \description{
 Mouse/human wraper for homologene
 }
+\examples{
+mouse2human(c('Eno2','17441'))
+}

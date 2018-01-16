@@ -16,3 +16,6 @@ homologene(genes, inTax, outTax)
 \description{
 Given a list of genes and a taxid, returns a data frame inlcuding the genes and their corresponding homologues
 }
+\examples{
+homologene(c('Eno2','17441'), inTax = 10090, outTax = 9606)
+}

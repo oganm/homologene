@@ -2,16 +2,18 @@ Package: homologene
 Type: Package
 Title: Quick access to homology information
 Version: 1.1.68
+Depends: R (>= 2.10)
 Imports:
-    dplyr,
-    magrittr
+    dplyr (>= 0.7.4),
+    magrittr (>= 1.5)
 Suggests:
-    testthat
+    testthat (>= 1.0.2)
 Date: 2015-11-06
-Author: Ogan Mancarci
-Maintainer: Ogan Mancarci <ogan.mancarci@gmail.com>
-Description: A pre-parsed version of homologene file from NCBI for easy access
-    to homology information
-License: MIT
+Authors@R: person("Ogan", "Mancarci", email = "ogan.mancarci@gmail.com", role = c("aut", "cre"))
+Maintainer@R: person("Ogan", "Mancarci", email = "ogan.mancarci@gmail.com", role = c("aut", "cre"))
+BugReports: https://github.com/oganm/homologene/issues
+URL: https://github.com/oganm/homologene
+Description: This package is a wrapper for the homologene database by NCBI. It allows searching for gene homologs accross species.
+License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 6.0.1
