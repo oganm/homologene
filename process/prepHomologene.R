@@ -4,24 +4,16 @@ library(data.table)
 library(git2r)
 library(ogbox)
 devtools::use_data_raw()
-# taxes = read.table('ftp://ftp.ncbi.nlm.nih.gov/mmdb/pdbeast/tax.table',sep = '')
-
-# download taxonomy data if it's not already there
-if(!file.exists('data-raw/taxdump/names.dmp')){
-    download.file(url ='ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz', destfile = "data-raw/taxtump.tar.gz")
-    dir.create('data-raw/taxdump', showWarnings = FALSE)
-    untar('data-raw/taxtump.tar.gz',exdir = 'data-raw/taxdump/')
-}
-
-
 
 homologeneVersion = readLines('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/RELEASE_NUMBER') %>% as.integer
 
 # if the release is new, update
 if(homologeneVersion!=readLines('data-raw/release')){
-    taxData = fread('data-raw/taxdump/names.dmp',data.table=FALSE)
-    taxData = taxData[c(1,3,5,7)]
-    names(taxData) = c('tax_id','name_txt','unique_name','name_class')
+    taxData = read.table('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/build68/build_inputs/taxid_taxname',
+                         sep = '\t',
+                         stringsAsFactors = FALSE)
+    colnames(taxData) = c('tax_id','name_txt')
+
     speciesToAdd = c('Homo sapiens',
                      'Mus musculus',
                      'Rattus norvegicus',
