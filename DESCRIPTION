@@ -14,7 +14,7 @@ Authors@R: c(
     person("Leon","French", role = c('ctb')))
 BugReports: https://github.com/oganm/homologene/issues
 URL: https://github.com/oganm/homologene
-Description: This package is a wrapper for the homologene database by NCBI. It allows searching for gene homologs across species.
+Description: A wrapper for the homologene database by NCBI. It allows searching for gene homologs across species.
 License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 6.0.1
