@@ -8,13 +8,15 @@ Imports:
     magrittr (>= 1.5)
 Suggests:
     testthat (>= 1.0.2)
-Date: 2015-11-06
+Date: 2018-01-17
 Authors@R: c(
     person("Ogan", "Mancarci", email = "ogan.mancarci@gmail.com", role = c("aut", "cre")),
     person("Leon","French", role = c('ctb')))
 BugReports: https://github.com/oganm/homologene/issues
 URL: https://github.com/oganm/homologene
-Description: A wrapper for the homologene database by NCBI. It allows searching for gene homologs across species.
+Description: A wrapper for the homologene database by the National Center for
+    Biotechnology Information ('NCBI'). It allows searching for gene homologs across 
+    species. Data in this package can be found at <ftp://ftp.ncbi.nih.gov/pub/HomoloGene/build68/>.
 License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 6.0.1

@@ -3,6 +3,7 @@ library(dplyr)
 library(data.table)
 library(git2r)
 library(ogbox)
+library(stringr)
 devtools::use_data_raw()
 
 homologeneVersion = readLines('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/RELEASE_NUMBER') %>% as.integer
@@ -46,6 +47,13 @@ if(homologeneVersion!=readLines('data-raw/release')){
     version = getVersion()
     version %<>% strsplit('\\.') %>% {.[[1]]}
     setVersion(paste(version[1],version[2],homologeneVersion,sep='.'))
+    
+    description = readLines('DESCRIPTION')
+    description[grepl('build[0-9]',description)] = str_replace(description[grepl('build[0-9]',description)],
+                                                               'build[0-9]*?(?=/)',
+                                                               paste0('build',homologeneVersion))
+    writeLines(text = description,con = 'DESCRIPTION')
+    
     git2r::add(repo,path ='DESCRIPTION')
     
     git2r::add(repo,'data/homologeneData.rda')
