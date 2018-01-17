@@ -1,6 +1,6 @@
 Package: homologene
 Type: Package
-Title: Quick access to homology information
+Title: Quick Access to Homology Information
 Version: 1.1.68
 Depends: R (>= 3.1.2)
 Imports:
@@ -9,13 +9,12 @@ Imports:
 Suggests:
     testthat (>= 1.0.2)
 Date: 2015-11-06
-Authors@R: 
+Authors@R: c(
     person("Ogan", "Mancarci", email = "ogan.mancarci@gmail.com", role = c("aut", "cre")),
-    person("Leon","French", role = c('ctb'))
-Maintainer@R: person("Ogan", "Mancarci", email = "ogan.mancarci@gmail.com", role = c("aut", "cre"))
+    person("Leon","French", role = c('ctb')))
 BugReports: https://github.com/oganm/homologene/issues
 URL: https://github.com/oganm/homologene
-Description: This package is a wrapper for the homologene database by NCBI. It allows searching for gene homologs accross species.
+Description: This package is a wrapper for the homologene database by NCBI. It allows searching for gene homologs across species.
 License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 6.0.1
