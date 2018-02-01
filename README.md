@@ -22,8 +22,13 @@ Installation
 ============
 
 ``` r
-library(devtools)
-install_github('oganm/homologene')
+install.packages('homologene')
+```
+
+or
+
+``` r
+devtools::install_github('oganm/homologene')
 ```
 
 Usage
