@@ -16,7 +16,7 @@
 #' @param possibleOrigins Taxonomic identifiers of possible origin species
 #' @param possibleTargets Taxonomic identifiers of possible target species
 #' @param returnAllPossible if TRUE returns all possible pairings with non zero gene matches. If FALSE (default) returns the best match
-#' @return A data frame if \code(returnAllPossibe = FALSE) and a list of data frames if \code{TRUE}
+#' @return A data frame if \code{returnAllPossibe = FALSE} and a list of data frames if \code{TRUE}
 #' @export
 autoTranslate = function(genes,
                          targetGenes,

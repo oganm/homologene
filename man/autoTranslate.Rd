@@ -20,7 +20,7 @@ from the target species.}
 \item{returnAllPossible}{if TRUE returns all possible pairings with non zero gene matches. If FALSE (default) returns the best match}
 }
 \value{
-A data frame if \code(returnAllPossibe = FALSE) and a list of data frames if \code{TRUE}
+A data frame if \code{returnAllPossibe = FALSE} and a list of data frames if \code{TRUE}
 }
 \description{
 Given a list of query gene list and a target gene list, the function
