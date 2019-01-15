@@ -23,7 +23,7 @@ autoTranslate = function(genes,
                          possibleOrigins= NULL,
                          possibleTargets = NULL,
                          returnAllPossible = FALSE){
-    pairwise = homologeneData$Taxonomy %>% unique %>% combn(2)  %>% {cbind(.,.[c(2,1),])}
+    pairwise = homologene::homologeneData$Taxonomy %>% unique %>% combn(2)  %>% {cbind(.,.[c(2,1),])}
     
     if(!is.null(possibleOrigins)){
         possibleOrigins[possibleOrigins == 'human'] = 9606
