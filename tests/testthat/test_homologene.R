@@ -41,6 +41,9 @@ test_that('automatic matching',{
     
     expect_identical(autoTrans,autoTrans2[[1]])
     
+    selfMatch = suppressWarnings(autoTranslate(inGenes,inGenes,returnAllPossible = FALSE))
+    
+    expect_true(all(names(selfMatch) == c("10090", "10090", "10090_ID", "10090_ID")))
 })
 
 

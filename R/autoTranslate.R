@@ -23,19 +23,44 @@ autoTranslate = function(genes,
                          possibleOrigins= NULL,
                          possibleTargets = NULL,
                          returnAllPossible = FALSE){
-    pairwise = homologene::homologeneData$Taxonomy %>% unique %>% combn(2)  %>% {cbind(.,.[c(2,1),])}
-    
+    pairwise = homologene::homologeneData$Taxonomy %>%
+        unique %>% combn(2)  %>%
+        {cbind(.,.[c(2,1),],
+               rbind(homologene::homologeneData$Taxonomy %>%
+                         unique,homologene::homologeneData$Taxonomy %>%
+                         unique))}
+
     if(!is.null(possibleOrigins)){
         possibleOrigins[possibleOrigins == 'human'] = 9606
         possibleOrigins[possibleOrigins == 'mouse'] = 10090
         
-        pairwise = pairwise[,pairwise[1,] %in% possibleOrigins]
+        pairwise = pairwise[,pairwise[1,] %in% possibleOrigins, drop = FALSE]
+    } else{
+        possibleOrigins = homologene::homologeneData$Taxonomy %>% unique
     }
     if(!is.null(possibleTargets)){
         possibleTargets[possibleTargets == 'human'] = 9606
         possibleTargets[possibleTargets == 'mouse'] = 10090
-        pairwise = pairwise[,pairwise[2,] %in% possibleTargets]
+        pairwise = pairwise[,pairwise[2,] %in% possibleTargets,drop = FALSE]
+    } else{
+        possibleTargets = homologene::homologeneData$Taxonomy %>% unique
     }
+    
+    
+    possibleOriginData = homologene::homologeneData %>%
+        dplyr::filter(Taxonomy %in% possibleOrigins & (Gene.Symbol %in% genes | Gene.ID %in% genes)) %>%
+        dplyr::group_by(Taxonomy)
+    possibleOriginCounts = possibleOriginData %>% dplyr::summarise(n = n())
+    
+    possibleTargetData = homologene::homologeneData %>%
+        dplyr::filter(Taxonomy %in% possibleTargets & (Gene.Symbol %in% targetGenes | Gene.ID %in% targetGenes)) %>%
+        dplyr::group_by(Taxonomy)
+    possibleTargetCounts = possibleTargetData%>% dplyr::summarise(n = n())
+    
+    
+    pairwise = pairwise[,pairwise[1,] %in% possibleOriginCounts$Taxonomy,drop= FALSE]
+    pairwise = pairwise[,pairwise[2,] %in% possibleTargetCounts$Taxonomy, drop = FALSE]
+    
     
     pairwise %>% apply(2,function(taxes){
         homologene(genes,inTax = taxes[1],outTax = taxes[2])
@@ -55,6 +80,5 @@ autoTranslate = function(genes,
     } else{
         possibleTranslations = possibleTranslations[translationCounts!=0]
     }
-    
     return(possibleTranslations)
 }
