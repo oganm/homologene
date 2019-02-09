@@ -1,4 +1,7 @@
 library(biomaRt)
+library(dplyr)
+library(magrittr)
+devtools::load_all()
 
 martdb = useMart('ENSEMBL_MART_ENSEMBL')
 biomaRt::listDatasets(martdb) %>% dplyr::filter(grepl(dataset,))
@@ -43,6 +46,54 @@ biomartName = data.frame(
                     'mmulatta',
                     'hsapiens'),stringsAsFactors = FALSE
 )
+
+
+
+# look for the gene symbol column for each species.
+validSymbolFilters = lapply(seq_len(nrow(biomartName)), function(i){
+    name = biomartName[i,'biomartName']
+    targetGenes = homologeneData %>% filter(Taxonomy %in% biomartName[i,'tax_id']) %$% Gene.Symbol
+    mart = biomaRt::useMart('ENSEMBL_MART_ENSEMBL',paste0(name,'_gene_ensembl'))
+    
+    filters = listFilters(mart)
+    sapply(seq_len(nrow(filters)), function(t){
+        print(paste(name, filters[t,'name']))
+        tryCatch({
+            getBM(c('ensembl_gene_id'),filters = filters[t,'name'],value = targetGenes[sample(length(targetGenes),20)], mart = mart) %>% nrow
+        },
+        error = function(e){
+            return(0)
+        })
+    }) -> filterRowCounts
+    names(filterRowCounts) = filters[,'name']
+    return(filterRowCounts)
+})
+
+names(validSymbolFilters) = biomartName$biomartName
+validSymbolFilters %<>% purrr::map(function(x){x[x>0]})
+
+
+validIDFilters = lapply(seq_len(nrow(biomartName)), function(i){
+    name = biomartName[i,'biomartName']
+    targetIDs = homologeneData %>% filter(Taxonomy %in% biomartName[i,'tax_id']) %$% Gene.ID
+    mart = biomaRt::useMart('ENSEMBL_MART_ENSEMBL',paste0(name,'_gene_ensembl'))
+    
+    filters = listFilters(mart)
+    sapply(seq_len(nrow(filters)), function(t){
+        print(paste(name, filters[t,'name']))
+        tryCatch({
+            getBM(c('ensembl_gene_id'),filters = filters[t,'name'],value = targetIDs[sample(length(targetIDs),20)], mart = mart) %>% nrow
+        },
+        error = function(e){
+            return(0)
+        })
+    }) -> filterRowCounts
+    names(filterRowCounts) = filters[,'name']
+    return(filterRowCounts)
+})
+
+names(validIDFilters) = biomartName$biomartName
+validIDFilters %<>% purrr::map(function(x){x[x>0]})
 
 
 genes = c('Eno2','Mog')
