@@ -160,4 +160,9 @@ setVersion(paste(version,collapse = '.'))
 add(repo,'DESCRIPTION')
 
 git2r::commit(repo,message = 'homologeneData2 automatic update')
-git2r::commit(repo,message = 'homologeneData2 auto update setup')
+
+
+token = readLines('data-raw/auth')
+Sys.setenv(GITHUB_PAT = token)
+cred = git2r::cred_token()
+git2r::push(repo,credentials = cred)
