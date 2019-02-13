@@ -77,7 +77,7 @@ human2mouse(c('ENO2','MOG','GZMH'))
 homologeneData2
 ===============
 
-The package also includes an updated version of the homologene database. For the procedure followed for updating, see [this blog post](https://oganm.com/homologene-update/) and/or see the [processing code](processing/prepHomologene2.R).
+The package also includes an updated version of the homologene database. For the procedure followed for updating, see [this blog post](https://oganm.com/homologene-update/) and/or see the [processing code](process/prepHomologene2.R).
 
 Using the updated version can help you match genes that cannot matched due to out of date annotations.
 
