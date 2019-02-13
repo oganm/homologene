@@ -20,12 +20,15 @@ homologene = function(genes, inTax, outTax, db = homologene::homologeneData){
     names(out2)[2] = outTax
     names(out2)[3] = paste0(outTax,'_ID')
     
-    output = merge(out,out2) %>% dplyr::select(2,4,3,5)
+    # merge from HID to support translate from self
+    output = merge(out,out2,'HID') %>% 
+        dplyr::select(2,4,3,5)
 
     # preserve order with temporary column
     output$sortBy <- factor(output[,1], levels = genes)
     output <- dplyr::arrange(output, sortBy)
     output$sortBy <- NULL
+    output %<>% {colnames(.)= gsub('\\.(x|y)','',colnames(.));.}
     
     return(output)
 }

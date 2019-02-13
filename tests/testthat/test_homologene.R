@@ -18,9 +18,39 @@ test_that('Other species',{
     
 })
 
+
+test_that('automatic matching',{
+    inGenes = c('Eno2','Mog','Gzme','Gzmg','Gzmf')
+    targetGenes = c('ENO2','MOG','GZMH')
+    autoTransList = autoTranslate(inGenes,targetGenes,returnAllPossible = TRUE)
+    expect_true(is.list(autoTransList))
+    expect_warning(autoTranslate(inGenes,targetGenes,returnAllPossible = FALSE),regexp = 'There are other pairings')
+    
+    autoTrans = autoTranslate(inGenes,targetGenes,
+                              possibleOrigins = c('human','mouse'),possibleTargets = c('human','mouse'),
+                              returnAllPossible = FALSE)
+    
+    expect_true(is.data.frame(autoTrans))
+    expect_true(all(colnames(autoTrans)[1:2] == c('10090','9606')))
+    
+    autoTrans2 = autoTranslate(inGenes,targetGenes,
+                              possibleOrigins = c('10090','9606'),possibleTargets = c('10090','9606'),
+                              returnAllPossible = TRUE)
+    
+    expect_true(length(autoTrans2) == 1)
+    
+    expect_identical(autoTrans,autoTrans2[[1]])
+    
+    selfMatch = suppressWarnings(autoTranslate(inGenes,inGenes,returnAllPossible = FALSE))
+    
+    expect_true(all(names(selfMatch) == c("10090", "10090", "10090_ID", "10090_ID")))
+})
+
+
 test_that('Detached behaviour',{
     detach("package:homologene", unload=TRUE)
     expect_that(homologene::mouse2human(c('Eno2','Mog'))$humanGene,equals(c('ENO2','MOG')))
     expect_that(dim(homologene::human2mouse(c('lolwut'))), equals(c(0,4)))
 })
+
 
