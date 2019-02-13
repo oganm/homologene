@@ -4,7 +4,7 @@
 \alias{homologene}
 \title{Get homologues of given genes}
 \usage{
-homologene(genes, inTax, outTax)
+homologene(genes, inTax, outTax, db = homologene::homologeneData)
 }
 \arguments{
 \item{genes}{A vector of gene symbols or NCBI ids}
@@ -12,6 +12,8 @@ homologene(genes, inTax, outTax)
 \item{inTax}{taxid of the species that the input genes are coming from}
 
 \item{outTax}{taxid of the species that you are seeking homology}
+
+\item{db}{Homologene database to use.}
 }
 \description{
 Given a list of genes and a taxid, returns a data frame inlcuding the genes and their corresponding homologues

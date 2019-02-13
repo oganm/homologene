@@ -74,6 +74,37 @@ human2mouse(c('ENO2','MOG','GZMH'))
     ## 5      GZMH      Gzmg    2999   14944
     ## 6      GZMH      Gzmf    2999   14943
 
+homologeneData2
+===============
+
+The package also includes an updated version of the homologene database. For the procedure followed for updating, see [this blog post](https://oganm.com/homologene-update/) and/or see the [processing code](processing/prepHomologene2.R).
+
+Using the updated version can help you match genes that cannot matched due to out of date annotations.
+
+``` r
+mouse2human(c('Mesd',
+              'Trp53rka',
+              'Cstdc4',
+              'Ifit3b'))
+```
+
+    ## [1] mouseGene humanGene mouseID   humanID  
+    ## <0 rows> (or 0-length row.names)
+
+``` r
+mouse2human(c('Mesd',
+              'Trp53rka',
+              'Cstdc4',
+              'Ifit3b'),
+            db = homologeneData2)
+```
+
+    ##   mouseGene humanGene mouseID humanID
+    ## 1      Mesd      MESD   67943   23184
+    ## 2  Trp53rka    TP53RK  381406  112858
+    ## 3    Cstdc4      CSTA  433016    1475
+    ## 4    Ifit3b     IFIT3  667370    3437
+
 Mishaps
 =======
 

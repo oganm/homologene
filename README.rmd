@@ -51,6 +51,30 @@ mouse2human(c('Eno2','Mog'))
 human2mouse(c('ENO2','MOG','GZMH'))
 ```
 
+
+homologeneData2
+=================
+The package also includes an updated version of the homologene database. For the procedure followed for updating,
+see [this blog post](https://oganm.com/homologene-update/) and/or see the [processing code](processing/prepHomologene2.R).
+
+Using the updated version can help you match genes that cannot matched due to out of date annotations.
+
+
+```{r}
+mouse2human(c('Mesd',
+              'Trp53rka',
+              'Cstdc4',
+              'Ifit3b'))
+
+
+mouse2human(c('Mesd',
+              'Trp53rka',
+              'Cstdc4',
+              'Ifit3b'),
+            db = homologeneData2)
+```
+
+
 Mishaps
 =================
 As of version version 1.1.68, the output now includes NCBI ids. Since it doesn't change any of the existing column names or their order, this shouldn't cause problems in most use cases. If this is an issue for you plase notify me.

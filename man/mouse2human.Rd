@@ -4,10 +4,12 @@
 \alias{mouse2human}
 \title{Mouse/human wraper for homologene}
 \usage{
-mouse2human(genes)
+mouse2human(genes, db = homologene::homologeneData)
 }
 \arguments{
 \item{genes}{A vector of gene symbols or NCBI ids}
+
+\item{db}{Homologene database to use.}
 }
 \description{
 Mouse/human wraper for homologene
