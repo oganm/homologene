@@ -5,6 +5,8 @@ library(dplyr)
 library(geneSynonym)
 library(purrr)
 library(glue)
+library(git2r)
+
 devtools::load_all()
 
 download.file(url = "ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_history.gz", 
@@ -141,3 +143,21 @@ devtools::document()
 
 
 repo = repository('.')
+add(repo,'R/homologeneData2.R')
+add(repo,'data/homologeneData2.rda')
+add(repo,'man/homologeneData2.Rd')
+add(repo,'data-raw/homologene2.tsv')
+
+version = getVersion()
+version %<>% strsplit('\\.') %>% {.[[1]]}
+dateTail = format(Sys.Date(),'%y.%m.%d') %>% 
+    gsub(pattern = '\\.0','.',x=.) %>% strsplit('\\.') %>% {.[[1]]}
+
+version[4:6] = dateTail
+
+setVersion(paste(version,collapse = '.'))
+
+add(repo,'DESCRIPTION')
+
+git2r::commit(repo,message = 'homologeneData2 automatic update')
+git2r::commit(repo,message = 'homologeneData2 auto update setup')

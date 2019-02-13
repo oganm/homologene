@@ -17,17 +17,19 @@
 #' @param possibleTargets Taxonomic identifiers of possible target species
 #' @param returnAllPossible if TRUE returns all possible pairings with non zero gene matches. If FALSE (default) returns the best match
 #' @return A data frame if \code{returnAllPossibe = FALSE} and a list of data frames if \code{TRUE}
+#' @param db Homologene database to use. 
 #' @export
 autoTranslate = function(genes,
                          targetGenes,
                          possibleOrigins= NULL,
                          possibleTargets = NULL,
-                         returnAllPossible = FALSE){
-    pairwise = homologene::homologeneData$Taxonomy %>%
-        unique %>% combn(2)  %>%
+                         returnAllPossible = FALSE,
+                         db = homologene::homologeneData){
+    pairwise = db$Taxonomy %>%
+        unique %>% utils::combn(2)  %>%
         {cbind(.,.[c(2,1),],
-               rbind(homologene::homologeneData$Taxonomy %>%
-                         unique,homologene::homologeneData$Taxonomy %>%
+               rbind(db$Taxonomy %>%
+                         unique,db$Taxonomy %>%
                          unique))}
 
     if(!is.null(possibleOrigins)){
@@ -36,26 +38,26 @@ autoTranslate = function(genes,
         
         pairwise = pairwise[,pairwise[1,] %in% possibleOrigins, drop = FALSE]
     } else{
-        possibleOrigins = homologene::homologeneData$Taxonomy %>% unique
+        possibleOrigins = db$Taxonomy %>% unique
     }
     if(!is.null(possibleTargets)){
         possibleTargets[possibleTargets == 'human'] = 9606
         possibleTargets[possibleTargets == 'mouse'] = 10090
         pairwise = pairwise[,pairwise[2,] %in% possibleTargets,drop = FALSE]
     } else{
-        possibleTargets = homologene::homologeneData$Taxonomy %>% unique
+        possibleTargets = db$Taxonomy %>% unique
     }
     
     
-    possibleOriginData = homologene::homologeneData %>%
+    possibleOriginData = db %>%
         dplyr::filter(Taxonomy %in% possibleOrigins & (Gene.Symbol %in% genes | Gene.ID %in% genes)) %>%
         dplyr::group_by(Taxonomy)
-    possibleOriginCounts = possibleOriginData %>% dplyr::summarise(n = n())
+    possibleOriginCounts = possibleOriginData %>% dplyr::summarise(n = dplyr::n())
     
-    possibleTargetData = homologene::homologeneData %>%
+    possibleTargetData = db %>%
         dplyr::filter(Taxonomy %in% possibleTargets & (Gene.Symbol %in% targetGenes | Gene.ID %in% targetGenes)) %>%
         dplyr::group_by(Taxonomy)
-    possibleTargetCounts = possibleTargetData%>% dplyr::summarise(n = n())
+    possibleTargetCounts = possibleTargetData%>% dplyr::summarise(n = dplyr::n())
     
     
     pairwise = pairwise[,pairwise[1,] %in% possibleOriginCounts$Taxonomy,drop= FALSE]

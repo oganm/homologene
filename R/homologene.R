@@ -52,8 +52,8 @@ mouse2human = function(genes, db = homologene::homologeneData){
 #' @export
 #' @examples
 #' human2mouse(c('ENO2','4340'))
-human2mouse = function(genes, database = homologene::homologeneData){
-    out = homologene(genes,9606,10090, database)
+human2mouse = function(genes, db = homologene::homologeneData){
+    out = homologene(genes,9606,10090, db)
     names(out) = c('humanGene','mouseGene','humanID','mouseID')
     return(out)
 }

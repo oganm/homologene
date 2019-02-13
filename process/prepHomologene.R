@@ -46,7 +46,8 @@ if(homologeneVersion!=readLines('data-raw/release')){
     
     version = getVersion()
     version %<>% strsplit('\\.') %>% {.[[1]]}
-    setVersion(paste(version[1],version[2],homologeneVersion,sep='.'))
+    version[3] = homologeneVersion
+    setVersion(paste(version,collapse = '.'))
     
     description = readLines('DESCRIPTION')
     description[grepl('build[0-9]',description)] = str_replace(description[grepl('build[0-9]',description)],
@@ -63,8 +64,9 @@ if(homologeneVersion!=readLines('data-raw/release')){
     git2r::add(repo,'data-raw/release')
     git2r::commit(repo,message = paste('Automatic update to version',homologeneVersion))
     
-    pass = readLines('data-raw/auth')
-    cred = git2r::cred_user_pass('OganM',pass)
+    token = readLines('data-raw/auth')
+    Sys.setenv(GITHUB_PAT = token)
+    cred = git2r::cred_token()
     git2r::push(repo,credentials = cred)
 }
 

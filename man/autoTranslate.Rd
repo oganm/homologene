@@ -5,7 +5,8 @@
 \title{Attempt to automatically translate a gene list}
 \usage{
 autoTranslate(genes, targetGenes, possibleOrigins = NULL,
-  possibleTargets = NULL, returnAllPossible = FALSE)
+  possibleTargets = NULL, returnAllPossible = FALSE,
+  db = homologene::homologeneData)
 }
 \arguments{
 \item{genes}{A list of genes to match the target}
@@ -18,6 +19,8 @@ from the target species.}
 \item{possibleTargets}{Taxonomic identifiers of possible target species}
 
 \item{returnAllPossible}{if TRUE returns all possible pairings with non zero gene matches. If FALSE (default) returns the best match}
+
+\item{db}{Homologene database to use.}
 }
 \value{
 A data frame if \code{returnAllPossibe = FALSE} and a list of data frames if \code{TRUE}
