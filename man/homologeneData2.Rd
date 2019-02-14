@@ -9,7 +9,8 @@
 homologeneData2
 }
 \description{
-A modified copy of the homologene database where the gene IDs and symbols are updated when necesary. 
-Last update: Wed Feb 13 15:30:44 2019
+A modified copy of the homologene database. Homologene was updated at 2014 and many of its gene IDs and
+symbols are out of date. Here the IDs and symbols are replaced with their most current version
+Last update: Wed Feb 13 16:30:34 2019
 }
 \keyword{datasets}
