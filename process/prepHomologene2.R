@@ -30,6 +30,12 @@ modern_IDs  = list(syno10090,
     lapply(names) %>%
     do.call(c,.)
 
+modern_IDs = homologene::taxData$tax_id %>% lapply(function(x){
+    teval(paste0('syno',x))
+}) %>% 
+    # {validTax <<- homologene::taxData$tax_id[sapply(.,length)>300];.[sapply(.,length)>300]} %>%
+    lapply(names) %>% do.call(c,.)
+
 
 if(!exists("homologeneData2")){
     homologeneData2 = homologeneData
@@ -52,8 +58,9 @@ earlierst_date = gene_history %>%
 
 
 relevant_gene_history = gene_history %>%
-    filter(Discontinue_Date >= earlierst_date & 
-               tax_id %in% homologene::taxData$tax_id)
+    filter(Discontinue_Date >= earlierst_date # & 
+               # tax_id %in% homologene::taxData$tax_id
+           )
 
 
 
@@ -101,29 +108,21 @@ homologeneData2 =
     arrange(HID)
 
 # change the names with the new names
-modern_symbols = list(syno10090,
-                      syno10116,
-                      syno6239,
-                      syno7227,
-                      syno7955,
-                      syno9544,
-                      syno9606) %>% 
-    lapply(function(x){
-        strsplit(x,split = "\\|") %>% map_chr(1)
-    }) %>% do.call(c,.)
 
+download.file('ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz','data-raw/gene_info.gz')
+R.utils::gunzip('data-raw/gene_info.gz', overwrite = TRUE)
+system("awk '{print $1,$2,$3}' data-raw/gene_info > data-raw/relevant_gene_info")
+geneInfo = fread('data-raw/relevant_gene_info',sep=' ',skip=1, header = F,data.table = FALSE)
+names(geneInfo) = c('tax_id','GeneID','Symbol')
 
-modern_frame = tibble(modern_IDs,
-                      modern_symbols)
+matchToHomologene = match(homologeneData2$Gene.ID,geneInfo$GeneID)
 
-
-new_symbols = 
-    modern_frame$modern_symbols[match(homologeneData2$Gene.ID, modern_frame$modern_IDs)]
-
-
+modern_frame = tibble(modern_ids = homologeneData2$Gene.ID,
+                      modern_symbols = geneInfo$Symbol[matchToHomologene],
+                      modern_tax = geneInfo$tax_id[matchToHomologene])
 
 homologeneData2 %<>% 
-    mutate(Gene.Symbol = modern_frame$modern_symbols[match(Gene.ID,modern_frame$modern_IDs)])
+    mutate(Gene.Symbol = modern_frame$modern_symbols)
 
 
 write.table(homologeneData2,'data-raw/homologene2.tsv',sep='\t', row.names=FALSE,quote = FALSE)

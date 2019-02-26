@@ -10,33 +10,27 @@ homologeneVersion = readLines('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/REL
 
 # if the release is new, update
 if(homologeneVersion!=readLines('data-raw/release')){
+    download.file(url = "ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data", destfile = 'data-raw/homologene.data')
+    homologene = fread('data-raw/homologene.data',sep ='\t',quote='',stringsAsFactors = FALSE,data.table = FALSE)
+    names(homologene) = c('HID','Taxonomy','Gene.ID','Gene.Symbol','Protein.GI','Protein.Accession')
+    
+    
     taxData = read.table('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/build68/build_inputs/taxid_taxname',
                          sep = '\t',
                          stringsAsFactors = FALSE)
     colnames(taxData) = c('tax_id','name_txt')
 
-    speciesToAdd = c('Homo sapiens',
-                     'Mus musculus',
-                     'Rattus norvegicus',
-                     'Danio rerio',
-                     'Caenorhabditis elegans',
-                     'Drosophila melanogaster',
-                     'Macaca mulatta')
+    speciesToAdd = homologene$Taxonomy %>% unique
     
-    taxData %<>% filter(name_txt %in% speciesToAdd)
+    taxData %<>% filter(tax_id %in% speciesToAdd)
     
-    stopifnot(all(speciesToAdd %in% taxData$name_txt))
-    
-    taxData %<>% select('tax_id','name_txt')
+    stopifnot(all(speciesToAdd %in% taxData$tax_id))
     
     write.table(taxData,'data-raw/taxData.tsv',,sep='\t', row.names=FALSE,quote = FALSE)
     devtools::use_data(taxData,overwrite = TRUE)
     
     
-    download.file(url = "ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data", destfile = 'data-raw/homologene.data')
-    homologene = fread('data-raw/homologene.data',sep ='\t',quote='',stringsAsFactors = FALSE,data.table = FALSE)
-    names(homologene) = c('HID','Taxonomy','Gene.ID','Gene.Symbol','Protein.GI','Protein.Accession')
-    homologeneData = homologene %>% filter(Taxonomy %in% taxData$tax_id) %>% select(HID,Gene.Symbol,Taxonomy) %>% unique %>% arrange(Taxonomy)
+    homologeneData = homologene %>% select(HID,Gene.ID,Gene.Symbol,Taxonomy) %>% unique %>% arrange(Taxonomy)
     write.table(homologeneData,file = 'data-raw/homologeneData.tsv',sep='\t', row.names=FALSE)
     devtools::use_data(homologeneData, overwrite= TRUE)
     devtools::use_data(homologeneVersion, overwrite= TRUE)

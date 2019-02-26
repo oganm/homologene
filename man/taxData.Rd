@@ -4,7 +4,7 @@
 \name{taxData}
 \alias{taxData}
 \title{Names and ids of included species}
-\format{An object of class \code{data.frame} with 7 rows and 2 columns.}
+\format{An object of class \code{data.frame} with 21 rows and 2 columns.}
 \usage{
 taxData
 }

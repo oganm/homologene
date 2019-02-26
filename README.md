@@ -1,25 +1,44 @@
 
-homologene
-==========
+# homologene
 
-[![Build Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene) [![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene) [![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene) [![](https://img.shields.io/badge/devel%20version-1.2.68-blue.svg)](https://github.com/oganm/homologene)
+[![Build
+Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene)
+[![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene)
+[![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene)
+[![](https://img.shields.io/badge/devel%20version-1.2.68.19.2.24-blue.svg)](https://github.com/oganm/homologene)
 
 An r package that works as a wrapper to homologene
 
 Available species are
 
--   Homo sapiens
--   Mus musculus
--   Rattus norvegicus
--   Danio rerio
--   Caenorhabditis elegans
--   Drosophila melanogaster
--   Rhesus macaque
+``` r
+homologene::taxData
+```
 
-More species can be added on request
+    ##    tax_id                      name_txt
+    ## 1   10090                  Mus musculus
+    ## 2   10116             Rattus norvegicus
+    ## 3   28985          Kluyveromyces lactis
+    ## 4  318829            Magnaporthe oryzae
+    ## 5   33169         Eremothecium gossypii
+    ## 6    3702          Arabidopsis thaliana
+    ## 7    4530                  Oryza sativa
+    ## 8    4896     Schizosaccharomyces pombe
+    ## 9    4932      Saccharomyces cerevisiae
+    ## 10   5141             Neurospora crassa
+    ## 11   6239        Caenorhabditis elegans
+    ## 12   7165             Anopheles gambiae
+    ## 13   7227       Drosophila melanogaster
+    ## 14   7955                   Danio rerio
+    ## 15   8364 Xenopus (Silurana) tropicalis
+    ## 16   9031                 Gallus gallus
+    ## 17   9544                Macaca mulatta
+    ## 18   9598               Pan troglodytes
+    ## 19   9606                  Homo sapiens
+    ## 20   9615        Canis lupus familiaris
+    ## 21   9913                    Bos taurus
 
-Installation
-============
+# Installation
 
 ``` r
 install.packages('homologene')
@@ -31,10 +50,11 @@ or
 devtools::install_github('oganm/homologene')
 ```
 
-Usage
-=====
+# Usage
 
-Basic homologene function requires a list of gene symbols or NCBI ids, and an `inTax` and an `outTax`. In this example, `inTax` is the taxon id of *mus musculus* while `outTax` is for humans.
+Basic homologene function requires a list of gene symbols or NCBI ids,
+and an `inTax` and an `outTax`. In this example, `inTax` is the taxon id
+of *mus musculus* while `outTax` is for humans.
 
 ``` r
 homologene(c('Eno2','Mog'), inTax = 10090, outTax = 9606)
@@ -52,7 +72,9 @@ homologene(c('Eno2','17441'), inTax = 10090, outTax = 9606)
     ## 1  Eno2 ENO2    13807    2026
     ## 2   Mog  MOG    17441    4340
 
-For mouse and humans two convenience functions exist that removes the need to provide taxonomic identifiers. Note that the column names are not the same as the `homologene` output.
+For mouse and humans two convenience functions exist that removes the
+need to provide taxonomic identifiers. Note that the column names are
+not the same as the `homologene` output.
 
 ``` r
 mouse2human(c('Eno2','Mog'))
@@ -74,12 +96,15 @@ human2mouse(c('ENO2','MOG','GZMH'))
     ## 5      GZMH      Gzmg    2999   14944
     ## 6      GZMH      Gzmf    2999   14943
 
-homologeneData2
-===============
+# homologeneData2
 
-The package also includes an updated version of the homologene database. For the procedure followed for updating, see [this blog post](https://oganm.com/homologene-update/) and/or see the [processing code](process/prepHomologene2.R).
+The package also includes an updated version of the homologene database.
+For the procedure followed for updating, see [this blog
+post](https://oganm.com/homologene-update/) and/or see the [processing
+code](process/prepHomologene2.R).
 
-Using the updated version can help you match genes that cannot matched due to out of date annotations.
+Using the updated version can help you match genes that cannot matched
+due to out of date annotations.
 
 ``` r
 mouse2human(c('Mesd',
@@ -105,9 +130,13 @@ mouse2human(c('Mesd',
     ## 3    Cstdc4      CSTA  433016    1475
     ## 4    Ifit3b     IFIT3  667370    3437
 
-Mishaps
-=======
+# Mishaps
 
-As of version version 1.1.68, the output now includes NCBI ids. Since it doesn't change any of the existing column names or their order, this shouldn't cause problems in most use cases. If this is an issue for you plase notify me.
+As of version version 1.1.68, the output now includes NCBI ids. Since it
+doesn’t change any of the existing column names or their order, this
+shouldn’t cause problems in most use cases. If this is an issue for you
+plase notify me.
 
-If a you can't find a gene you are looking for it may have synonyms. See [geneSynonym](https://github.com/oganm/geneSynonym.git) package to find them. If you have other problems open an issue or send a mail.
+If a you can’t find a gene you are looking for it may have synonyms. See
+[geneSynonym](https://github.com/oganm/geneSynonym.git) package to find
+them. If you have other problems open an issue or send a mail.
