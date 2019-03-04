@@ -47,6 +47,28 @@ test_that('automatic matching',{
 })
 
 
+test_that('homologene2',{
+    mouse2human(c('Mesd',
+                  'Trp53rka',
+                  'Cstdc4',
+                  'Ifit3b'),
+                db = homologeneData2) -> 
+        genes
+    
+    expect_true(all(genes$humanGene == c("MESD", "TP53RK", "CSTA", "IFIT3")))
+    
+    mouse2human(c('Mesd',
+                  'Trp53rka',
+                  'Cstdc4',
+                  'Ifit3b'),
+                db = homologeneData) -> 
+        genes
+    
+    expect_true(nrow(genes)==0)
+})
+
+
+
 test_that('Detached behaviour',{
     detach("package:homologene", unload=TRUE)
     expect_that(homologene::mouse2human(c('Eno2','Mog'))$humanGene,equals(c('ENO2','MOG')))
