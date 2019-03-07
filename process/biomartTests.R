@@ -1,11 +1,64 @@
 library(biomaRt)
 library(dplyr)
 library(magrittr)
+library(data.table)
 devtools::load_all()
 
 martdb = useMart('ENSEMBL_MART_ENSEMBL')
-biomaRt::listDatasets(martdb) %>% dplyr::filter(grepl(dataset,))
-allDBs = biomaRt::listDatasets(martdb) 
+biomartDBs = biomaRt::listDatasets(martdb) 
+
+download.file(url ='ftp://ftp.ncbi.nlm.nih.gov/pub/taxonomy/taxdump.tar.gz', destfile = "data-raw/taxdump.tar.gz")
+dir.create('data-raw/taxdump', showWarnings = FALSE)
+untar('data-raw/taxdump.tar.gz',exdir = 'data-raw/taxdump/')
+
+allTaxData = fread('data-raw/taxdump/names.dmp',data.table=FALSE, sep = '\t',quote = "")
+allTaxData = allTaxData[c(1,3,5,7)]
+names(allTaxData) = c('tax_id','name_txt','unique_name','name_class')
+
+# allTaxData = read.table('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/build68/build_inputs/taxid_taxname',
+#                         sep = '\t',
+#                         stringsAsFactors = FALSE)
+# colnames(allTaxData) = c('tax_id','name_txt')
+    
+# first we want to assign a tax id to all *_gene_ensembl databases
+allTaxData %<>% filter(name_class == 'scientific name')
+
+# common formula is first letter of the genus followed by the species name.
+
+splitSpecies = allTaxData$name_txt %>% 
+    stringr::str_split(' ')
+
+allTaxData %<>% filter(!sapply(splitSpecies,length)<2)
+splitSpecies %<>% {.[!sapply(.,length)<2]}
+
+splitSpecies %>%
+    sapply(function(specie){
+        if(length(specie)<2){
+            return(NA)
+        }
+        
+        genus = specie[1] %>% 
+            tolower() %>% 
+            substr(1,1)
+        specie = specie[length(specie)]
+        
+        paste0(genus,specie)
+    }) -> allTaxData$biomart
+
+allTaxData %<>% filter(paste0(biomart,'_gene_ensembl') %in% biomartDBs$dataset)
+
+# assign species IDs to biomart databases
+biomartDBs %<>% 
+    mutate(tax_id = sapply(dataset,function(x){
+        allTaxData %>% filter(paste0(biomart,'_gene_ensembl') == x) %$% tax_id %>% paste(collapse = '|')
+    }))
+
+# take a look at species without taxIDs
+biomartDBs %>% filter(tax_id == '') 
+
+# unconventional names. manually match if they turn out to be useful later.
+
+
 
 inDatabase = taxData$name_txt %>% gsub(' ','_',.) %>% lapply(function(x){
     allDBs %>% dplyr::filter(grepl(dataset,x,ignore.case = TRUE))
