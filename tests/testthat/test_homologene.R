@@ -44,6 +44,11 @@ test_that('automatic matching',{
     selfMatch = suppressWarnings(autoTranslate(inGenes,inGenes,returnAllPossible = FALSE))
     
     expect_true(all(names(selfMatch) == c("10090", "10090", "10090_ID", "10090_ID")))
+    
+    # check to see if it works for gene IDs too
+    expect_true(is.data.frame(autoTranslate(genes = autoTrans$`10090_ID`,targetGenes = autoTrans$`9606_ID`)))
+    expect_true(length(autoTranslate(genes = autoTrans$`10090_ID`,targetGenes = autoTrans$`9606_ID`,returnAllPossible = TRUE)) == 1)
+    
 })
 
 

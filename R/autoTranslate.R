@@ -69,7 +69,7 @@ autoTranslate = function(genes,
     }) %>% {.[purrr::map_int(.,nrow)>0]} -> possibleTranslations
     
     possibleTranslations %>% sapply(function(trans){
-        sum(trans[,2] %in% targetGenes)
+        sum(c(trans[,2],trans[,4]) %in% targetGenes)
     }) -> translationCounts 
     
     if(!returnAllPossible){
