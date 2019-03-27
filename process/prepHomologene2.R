@@ -101,13 +101,25 @@ homologeneData2 =
 
 # change the names with the new names
 
-download.file('ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz','data-raw/gene_info.gz')
-R.utils::gunzip('data-raw/gene_info.gz', overwrite = TRUE)
-system("awk '{print $1,$2,$3}' data-raw/gene_info > data-raw/relevant_gene_info")
-geneInfo = fread('data-raw/relevant_gene_info',sep=' ',skip=1, header = F,data.table = FALSE)
-names(geneInfo) = c('tax_id','GeneID','Symbol')
+download.file('ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz',
+              'data-raw/gene_info.gz')
 
-matchToHomologene = match(homologeneData2$Gene.ID,geneInfo$GeneID)
+R.utils::gunzip('data-raw/gene_info.gz', overwrite = TRUE)
+
+# I can't do a taxonomy matching here as taxonomies don't always
+# match. some genes are listed under alternative names
+callBack = function(x,pos){
+    x[,c(1,2,3)]
+}
+
+geneInfo = read_tsv_chunked('data-raw/gene_info',
+                            DataFrameCallback$new(callBack),
+                            col_names = c('tax_id','GeneID','Symbol'),
+                            chunk_size = 1000000,skip = 1)
+
+# names(geneInfo) = c('tax_id','GeneID','Symbol')
+
+matchToHomologene = match(homologeneData2$Gene.ID,as.integer(geneInfo$GeneID))
 
 modern_frame = tibble(modern_ids = homologeneData2$Gene.ID,
                       modern_symbols = geneInfo$Symbol[matchToHomologene],
