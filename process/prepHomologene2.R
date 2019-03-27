@@ -6,7 +6,6 @@ library(purrr)
 library(glue)
 library(git2r)
 library(ogbox)
-library(data.table)
 
 devtools::load_all()
 
