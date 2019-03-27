@@ -10,7 +10,7 @@
 #' \code{possibleOrigins} or \code{possibleTargets} might return multiple hits, or if \code{returnAllPossible = TRUE}
 #' a wrong match can be returned.
 #' 
-#' @param genes A list of genes to match the target
+#' @param genes A list of genes to match the target. Symbols or NCBI ids
 #' @param targetGenes The target list. This list is supposed to represent a large number of genes
 #' from the target species.
 #' @param possibleOrigins Taxonomic identifiers of possible origin species
