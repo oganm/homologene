@@ -1,3 +1,43 @@
+#' Download gene symbol information
+#' 
+#' This function downloads the gene_info file from NCBI website and returns the
+#' gene symbols for current IDs.
+#'
+#' @param destfile Path of the output file. If NULL a temp file will be used
+#' @param justRead If TRUE and destfile exists, it reads the file instead of 
+#' downloading the latest one from NCBI 
+#' @param chunk_size Chunk size to be used with \code{link[readr]{read_tsv_chunked}}.
+#' The gene_info file is big enough to make its intake difficult. If you don't
+#' have large amounts of free memory you may have to reduce this number to read
+#' the file in smaller chunks
+#'
+#' @return A data frame with gene symbols for each current gene id
+#' @export
+#'
+#' @examples
+getGeneInfo = function(destfile = NULL, justRead = FALSE,chunk_size = 1000000){
+    if(is.null(destfile)){
+        destfile = tempfile()
+    }
+    if(!(!is.null(destfile) && file.exists(destfile) && justRead)){
+        download.file('ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz',
+                      paste0(destfile,'.gz'))
+        
+        R.utils::gunzip(paste0(destfile,'.gz'), overwrite = TRUE)
+    }
+    
+    callBack = function(x,pos){
+        x[,c(1,2,3)]
+    }
+    geneInfo = readr::read_tsv_chunked(destfile,
+                                       readr::DataFrameCallback$new(callBack),
+                                       col_names = c('tax_id','GeneID','Symbol'),
+                                       chunk_size = chunk_size, skip = 1,
+                                       col_types = 'iic')
+    
+}
+
+
 #' Download gene history file
 #'
 #' Downloads and reads the gene history file from NCBI website. This file is needed for
@@ -29,10 +69,7 @@ getGeneHistory = function(destfile = NULL, justRead = FALSE){
                                           'Discontinued_GeneID',
                                           'Discontinued_Symbol',
                                           'Discontinue_Date'),skip = 1,
-                            col_types = 'icici') %>%
-        mutate(Discontinued_GeneID = as.integer(Discontinued_GeneID),
-               tax_id = as.integer(tax_id),
-               Discontinue_Date= as.integer(Discontinue_Date))
+                            col_types = 'icici')
     return(gene_history)
 }
 
@@ -71,7 +108,13 @@ updateIDs = function(ids, gene_history){
         dplyr::filter(Discontinue_Date >= earlierst_date
         )
     
-    return(ids %>% sapply(traceID,relevant_gene_history))
+    # just speed things along if the input id list includes ids that
+    # are not discontinued
+    idsToProcess = ids %in% relevant_gene_history$Discontinued_GeneID
+    if(sum(idsToProcess)>0){
+        ids[idsToProcess] = ids[idsToProcess] %>%  sapply(traceID,relevant_gene_history)
+    }
+    return(ids)
 
 }
 
@@ -112,3 +155,36 @@ traceID = function(id,gene_history){
 
 
 
+#' Get the latest homologene file
+#' 
+#' This function downloads the latest homologene file from NCBI. Note that Homologene
+#' has not been updated since 2014 so the output will be identical to \code{\link{homologeneData}}
+#' included in this package. This function is here for futureproofing purposes.
+#'
+#' @param destfile Path of the output file. If NULL a temp file will be used
+#' @param justRead If TRUE and destfile exists, it reads the file instead of 
+#' downloading the latest one from NCBI 
+#'
+#' @return A data frame with homology groups, gene ids and gene symbols
+#' @export
+#'
+getHomologene = function(destfile = NULL, justRead = FALSE){
+    if(is.null(destfile)){
+        destfile = tempfile()
+    }
+    if(!(!is.null(destfile) && file.exists(destfile) && justRead)){
+        download.file('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data',
+                      destfile)
+    }
+    
+    homologene = readr::read_tsv('data-raw/homologene.data',
+                                 col_names = c('HID','Taxonomy','Gene.ID','Gene.Symbol','Protein.GI','Protein.Accession'),
+                                 col_types = 'iiicic')
+    
+    homologeneData = homologene %>% 
+        select(HID,Gene.ID,Gene.Symbol,Taxonomy) %>%
+        unique %>% 
+        arrange(HID)
+    
+    homologeneData %<>% as.data.frame
+}
