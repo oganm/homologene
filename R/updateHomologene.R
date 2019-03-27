@@ -17,12 +17,14 @@
 #'
 #' @examples
 updateHomologene = function(destfile = NULL,
-                            baseline = homologene::homologeneData2){
-    history_file = tempfile()
-    
-    message('acquiring gene history data')
-    gene_history = getGeneHistory()
-    
+                            baseline = homologene::homologeneData2,
+                            gene_history = NULL,
+                            gene_info = NULL){
+
+    if(is.null(gene_history)){
+        message('acquiring gene history data')
+        gene_history = getGeneHistory()
+    }
     # identify discontinued ids
     discontinued_ids = baseline %>% 
         dplyr::filter(Gene.ID %in% gene_history$Discontinued_GeneID)
@@ -34,7 +36,7 @@ updateHomologene = function(destfile = NULL,
     # tax ids in non homologene sources
     # we do filter for earliest date found to run this a little faster
     
-    message('Tracing discontinued IDs')
+    message('Tracing discontinued IDs. This might take a while.')
     discontinued_ids$Gene.ID %>% updateIDs(gene_history) ->
         new_ids
     
@@ -51,17 +53,22 @@ updateHomologene = function(destfile = NULL,
         rbind(discontinued_fix,unchanged_ids) %>% 
         dplyr::arrange(HID)
     
+    new_homo_frame %<>% mutate(
+        Gene.ID = as.integer(Gene.ID)
+    )
     
     
-    message('Downloading gene symbol information')
+    if(is.null(gene_info)){
+        message('Downloading gene symbol information')
+        gene_info = getGeneInfo()
+    }
     
-    geneInfo = getGeneInfo()
-    
-    matchToHomologene = match(new_homo_frame$Gene.ID,geneInfo$GeneID)
+    message('Updating gene symbols')
+    matchToHomologene = match(new_homo_frame$Gene.ID,gene_info$GeneID)
     
     modern_frame = data.frame(modern_ids = new_homo_frame$Gene.ID,
-                          modern_symbols = geneInfo$Symbol[matchToHomologene],
-                          modern_tax = geneInfo$tax_id[matchToHomologene],stringsAsFactors = FALSE)
+                          modern_symbols = gene_info$Symbol[matchToHomologene],
+                          modern_tax = gene_info$tax_id[matchToHomologene],stringsAsFactors = FALSE)
     
     new_homo_frame %<>% 
         mutate(Gene.Symbol = modern_frame$modern_symbols)

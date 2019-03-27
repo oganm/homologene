@@ -10,7 +10,7 @@ usethis::use_data_raw()
 homologeneVersion = readLines('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/RELEASE_NUMBER') %>% as.integer
 
 # if the release is new, update
-if(homologeneVersion!=readLines('data-raw/release')){
+if(homologeneVersion==readLines('data-raw/release')){
     
     homologeneData = getHomologene()
     
