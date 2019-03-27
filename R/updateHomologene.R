@@ -66,6 +66,7 @@ updateHomologene = function(destfile = NULL,
     message('Updating gene symbols')
     matchToHomologene = match(new_homo_frame$Gene.ID,gene_info$GeneID)
     
+    # tax information isn't really needed here. just added for testing purposes
     modern_frame = data.frame(modern_ids = new_homo_frame$Gene.ID,
                           modern_symbols = gene_info$Symbol[matchToHomologene],
                           modern_tax = gene_info$tax_id[matchToHomologene],stringsAsFactors = FALSE)

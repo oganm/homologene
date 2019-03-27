@@ -28,7 +28,7 @@ if(homologeneVersion==readLines('data-raw/release')){
     write.table(taxData,'data-raw/taxData.tsv',sep='\t', row.names=FALSE,quote = FALSE)
     usethis::use_data(taxData,overwrite = TRUE)
     
-    write.table(homologeneData,file = 'data-raw/homologeneData.tsv',sep='\t', row.names=FALSE)
+    write.table(homologeneData,file = 'data-raw/homologeneData.tsv',sep='\t', row.names=FALSE,quote = FALSE)
     usethis::use_data(homologeneData, overwrite= TRUE)
     usethis::use_data(homologeneVersion, overwrite= TRUE)
     writeLines(as.character(homologeneVersion),con = 'data-raw/release')
