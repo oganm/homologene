@@ -16,6 +16,6 @@ downloading the latest one from NCBI}
 A data frame with latest gene history information
 }
 \description{
-Downloads gene history file from NCBI website. This file is needed for
+Downloads and reads the gene history file from NCBI website. This file is needed for
 other functions
 }

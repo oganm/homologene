@@ -1,6 +1,6 @@
 #' Download gene history file
 #'
-#' Downloads gene history file from NCBI website. This file is needed for
+#' Downloads and reads the gene history file from NCBI website. This file is needed for
 #' other functions
 #'
 #' @param destfile Path of the output file. If NULL a temp file will be used
@@ -53,8 +53,10 @@ getGeneHistory = function(destfile = NULL, justRead = FALSE){
 #' @export
 #'
 #' @examples
+#' \dontrun{
 #' gene_history = getGeneHistory()
 #' updateIDs(c("4340964", "4349034", "4332470", "4334151", "4323831"),gene_history)
+#' }
 #' 
 updateIDs = function(ids, gene_history){
     # we do not filter for taxonomy information as some genes use alternative

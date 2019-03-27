@@ -24,7 +24,9 @@ Given a list of gene ids and gene history information, traces changes in the
 gene's name to get the latest valid ID
 }
 \examples{
+\dontrun{
 gene_history = getGeneHistory()
 updateIDs(c("4340964", "4349034", "4332470", "4334151", "4323831"),gene_history)
+}
 
 }

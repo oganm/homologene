@@ -44,12 +44,22 @@ updateHomologene = function(destfile,
     callBack = function(x,pos){
         x[,c(1,2,3)]
     }
+    message('Reading gene symbol information')
     
     geneInfo = readr::read_tsv_chunked('data-raw/gene_info',
                                 readr::DataFrameCallback$new(callBack),
                                 col_names = c('tax_id','GeneID','Symbol'),
-                                chunk_size = 1000000,skip = 1)
+                                chunk_size = 1000000,skip = 1,
+                                col_types = 'iic')
     
-    matchToHomologene = match(new_homo_frame$Gene.ID,as.integer(geneInfo$GeneID))
+    matchToHomologene = match(new_homo_frame$Gene.ID,geneInfo$GeneID)
     
+    modern_frame = tibble(modern_ids = new_homo_frame$Gene.ID,
+                          modern_symbols = geneInfo$Symbol[matchToHomologene],
+                          modern_tax = geneInfo$tax_id[matchToHomologene])
+    
+    new_homo_frame %<>% 
+        mutate(Gene.Symbol = modern_frame$modern_symbols)
+    
+    return(new_homo_frame)
 }
