@@ -16,10 +16,11 @@ devtools::load_all()
 # }
 
 # takes about 15 minutes. I might as well update it from scratch each time.
+tictoc::tic()
 homologeneData2 = 
     updateHomologene(destfile = 'data-raw/homologene2.tsv',
                      baseline = homologeneData)
-
+tictoc::toc()
 
 usethis::use_data(homologeneData2,overwrite = TRUE)
 
