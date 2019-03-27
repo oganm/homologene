@@ -21,15 +21,6 @@ gene_history = read_tsv('data-raw/gene_history.gz',
                                       'Discontinued_Symbol',
                                       'Discontinue_Date'))
 
-modern_IDs  = list(syno10090,
-                   syno10116,
-                   syno6239,
-                   syno7227,
-                   syno7955,
-                   syno9544,
-                   syno9606) %>%
-    lapply(names) %>%
-    do.call(c,.)
 
 modern_IDs = homologene::taxData$tax_id %>% lapply(function(x){
     teval(paste0('syno',x))
