@@ -2,7 +2,6 @@ devtools::install_github('oganm/geneSynonym')
 library(readr)
 library(magrittr)
 library(dplyr)
-library(geneSynonym)
 library(purrr)
 library(glue)
 library(git2r)
@@ -20,13 +19,6 @@ gene_history = read_tsv('data-raw/gene_history.gz',
                                       'Discontinued_GeneID',
                                       'Discontinued_Symbol',
                                       'Discontinue_Date'))
-
-
-modern_IDs = homologene::taxData$tax_id %>% lapply(function(x){
-    teval(paste0('syno',x))
-}) %>% 
-    # {validTax <<- homologene::taxData$tax_id[sapply(.,length)>300];.[sapply(.,length)>300]} %>%
-    lapply(names) %>% do.call(c,.)
 
 
 if(!exists("homologeneData2")){
