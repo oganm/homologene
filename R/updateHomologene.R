@@ -1,4 +1,22 @@
-updateHomologene = function(destfile,
+#' Update homologene database
+#' 
+#' Creates an updated version of the homologene database. This is done by downloading
+#' the latest gene annotation information and tracing changes in gene symbols and 
+#' identifiers over history. \code{\link{homologeneData2}} was created using 
+#' this function over the original \code{\link{homologeneData}}. This function 
+#' requires downloading large amounts of data from the NCBI ftp servers.
+#'
+#' @param destfile Optional. Path of the output file.
+#' @param baseline The baseline homologene file to be used. By default uses the
+#' \code{\link{homologeneData2} that is included in this package. The more ids 
+#' to update, the more time is needed for the update which is why the default option
+#' uses an already updated version of the original database.
+#'
+#' @return 
+#' @export
+#'
+#' @examples
+updateHomologene = function(destfile = NULL,
                             baseline = homologene::homologeneData2){
     history_file = tempfile()
     
@@ -37,29 +55,22 @@ updateHomologene = function(destfile,
     
     message('Downloading gene symbol information')
     
-    tmp = tempfile()
-    
-    download.file('ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz',
-                  tmp)
-    callBack = function(x,pos){
-        x[,c(1,2,3)]
-    }
-    message('Reading gene symbol information')
-    
-    geneInfo = readr::read_tsv_chunked('data-raw/gene_info',
-                                readr::DataFrameCallback$new(callBack),
-                                col_names = c('tax_id','GeneID','Symbol'),
-                                chunk_size = 1000000,skip = 1,
-                                col_types = 'iic')
+    geneInfo = getGeneInfo()
     
     matchToHomologene = match(new_homo_frame$Gene.ID,geneInfo$GeneID)
     
-    modern_frame = tibble(modern_ids = new_homo_frame$Gene.ID,
+    modern_frame = data.frame(modern_ids = new_homo_frame$Gene.ID,
                           modern_symbols = geneInfo$Symbol[matchToHomologene],
-                          modern_tax = geneInfo$tax_id[matchToHomologene])
+                          modern_tax = geneInfo$tax_id[matchToHomologene],stringsAsFactors = FALSE)
     
     new_homo_frame %<>% 
         mutate(Gene.Symbol = modern_frame$modern_symbols)
+    
+    if(!is.null(destfile)){
+        write.table(new_homo_frame,destfile,
+                    sep='\t', row.names=FALSE,quote = FALSE)
+        
+    }
     
     return(new_homo_frame)
 }
