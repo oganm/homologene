@@ -4,7 +4,7 @@
 \name{homologeneData2}
 \alias{homologeneData2}
 \title{homologeneData2}
-\format{An object of class \code{data.frame} with 270799 rows and 4 columns.}
+\format{An object of class \code{data.frame} with 269592 rows and 4 columns.}
 \usage{
 homologeneData2
 }

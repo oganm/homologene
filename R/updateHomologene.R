@@ -82,7 +82,8 @@ updateHomologene = function(destfile = NULL,
     
     new_homo_frame %<>% 
         dplyr::mutate(Gene.Symbol = modern_frame$modern_symbols)
-    
+    # remove convergent gene ids with same HIDs
+    new_homo_frame %<>% unique()
     if(!is.null(destfile)){
         utils::write.table(new_homo_frame,destfile,
                            sep='\t', row.names=FALSE,quote = FALSE)
