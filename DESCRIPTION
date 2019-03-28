@@ -1,6 +1,6 @@
 Package: homologene
 Type: Package
-Title: Quick Access to Homology Information
+Title: Quick Access to Homologene and Gene Annotation Updates
 Version: 1.4.68.19.3.27
 Depends: R (>= 3.1.2)
 Imports:
@@ -20,6 +20,9 @@ URL: https://github.com/oganm/homologene
 Description: A wrapper for the homologene database by the National Center for
     Biotechnology Information ('NCBI'). It allows searching for gene homologs across 
     species. Data in this package can be found at <ftp://ftp.ncbi.nih.gov/pub/HomoloGene/build68/>.
+    The package also includes an updated version of the homologene database where 
+    gene identifiers and symbols are replaced with their latest (at the time of
+    submission) version and functions to fetch latest annotation data to keep updated.
 License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 6.1.1
