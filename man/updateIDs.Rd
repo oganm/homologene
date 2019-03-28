@@ -10,10 +10,6 @@ updateIDs(ids, gene_history)
 \item{ids}{Gene ids}
 
 \item{gene_history}{Gene history information, probably returned by  \code{\link{getGeneHistory}}}
-
-\item{cores}{If greater than 1, \code{\link[parallel]{mc.lapply}} will be used to parallize
-the operation. This doesn't work on windows. The older the gene ids are the slower
-this operation is.}
 }
 \value{
 A character vector. New ids for genes that changed ids, or "-" for discontinued genes.

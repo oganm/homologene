@@ -8,14 +8,23 @@
 #'
 #' @param destfile Optional. Path of the output file.
 #' @param baseline The baseline homologene file to be used. By default uses the
-#' \code{\link{homologeneData2} that is included in this package. The more ids 
+#' \code{\link{homologeneData2}} that is included in this package. The more ids 
 #' to update, the more time is needed for the update which is why the default option
 #' uses an already updated version of the original database.
+#' @param gene_history A gene history data frame, possibly returned by \code{\link{getGeneHistory}}
+#' function. Use this if you want to have a static gene_history file to update up to a specific date.
+#' An up to date gene_history object can be set to update to a specific date by trimming
+#' rows that have recent dates. Note that the same is not possible for the gene_info 
+#' If not provided, the latest file will be downloaded.
+#' @param gene_info A gene info data frame that contatins ID-symbol matches,
+#' possibly returned by \code{\link{getGeneInfo}}. Use this if you
+#' want a static version. Should be in sync with the gene_history file. Note that there is 
+#' no easy way to track changes in gene symbols back in time so if you want to update it up
+#' to a specific date, make sure you don't lose that file.
 #'
-#' @return 
+#' @return Homologene database in a data frame with updated gene IDs and symbols
 #' @export
 #'
-#' @examples
 updateHomologene = function(destfile = NULL,
                             baseline = homologene::homologeneData2,
                             gene_history = NULL,
@@ -53,7 +62,7 @@ updateHomologene = function(destfile = NULL,
         rbind(discontinued_fix,unchanged_ids) %>% 
         dplyr::arrange(HID)
     
-    new_homo_frame %<>% mutate(
+    new_homo_frame %<>% dplyr::mutate(
         Gene.ID = as.integer(Gene.ID)
     )
     
@@ -72,11 +81,11 @@ updateHomologene = function(destfile = NULL,
                           modern_tax = gene_info$tax_id[matchToHomologene],stringsAsFactors = FALSE)
     
     new_homo_frame %<>% 
-        mutate(Gene.Symbol = modern_frame$modern_symbols)
+        dplyr::mutate(Gene.Symbol = modern_frame$modern_symbols)
     
     if(!is.null(destfile)){
-        write.table(new_homo_frame,destfile,
-                    sep='\t', row.names=FALSE,quote = FALSE)
+        utils::write.table(new_homo_frame,destfile,
+                           sep='\t', row.names=FALSE,quote = FALSE)
         
     }
     

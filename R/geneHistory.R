@@ -14,14 +14,13 @@
 #' @return A data frame with gene symbols for each current gene id
 #' @export
 #'
-#' @examples
 getGeneInfo = function(destfile = NULL, justRead = FALSE,chunk_size = 1000000){
     if(is.null(destfile)){
         destfile = tempfile()
     }
     if(!(!is.null(destfile) && file.exists(destfile) && justRead)){
-        download.file('ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz',
-                      paste0(destfile,'.gz'))
+        utils::download.file('ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz',
+                             paste0(destfile,'.gz'))
         
         R.utils::gunzip(paste0(destfile,'.gz'), overwrite = TRUE)
     }
@@ -56,8 +55,8 @@ getGeneHistory = function(destfile = NULL, justRead = FALSE){
     }
     
     if(!(!is.null(destfile) && file.exists(destfile) && justRead)){
-        download.file(url = "ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_history.gz", 
-                      destfile = paste0(destfile,'.gz'))
+        utils::download.file(url = "ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_history.gz", 
+                             destfile = paste0(destfile,'.gz'))
         
         
         R.utils::gunzip(paste0(destfile,'.gz'), overwrite = TRUE)
@@ -81,9 +80,6 @@ getGeneHistory = function(destfile = NULL, justRead = FALSE){
 #'
 #' @param ids Gene ids
 #' @param gene_history Gene history information, probably returned by  \code{\link{getGeneHistory}}
-#' @param cores If greater than 1, \code{\link[parallel]{mc.lapply}} will be used to parallize
-#' the operation. This doesn't work on windows. The older the gene ids are the slower
-#' this operation is.
 #'
 #' @return A character vector. New ids for genes that changed ids, or "-" for discontinued genes.
 #' the input itself.
@@ -173,8 +169,8 @@ getHomologene = function(destfile = NULL, justRead = FALSE){
         destfile = tempfile()
     }
     if(!(!is.null(destfile) && file.exists(destfile) && justRead)){
-        download.file('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data',
-                      destfile)
+        utils::download.file('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data',
+                             destfile)
     }
     
     homologene = readr::read_tsv('data-raw/homologene.data',
@@ -182,9 +178,9 @@ getHomologene = function(destfile = NULL, justRead = FALSE){
                                  col_types = 'iiicic')
     
     homologeneData = homologene %>% 
-        select(HID,Gene.ID,Gene.Symbol,Taxonomy) %>%
+        dplyr::select(HID,Gene.ID,Gene.Symbol,Taxonomy) %>%
         unique %>% 
-        arrange(HID)
+        dplyr::arrange(HID)
     
     homologeneData %<>% as.data.frame
 }
