@@ -54,6 +54,7 @@ dateTail = format(Sys.Date(),'%y.%m.%d') %>%
 version[4:6] = dateTail
 
 setVersion(paste(version,collapse = '.'))
+ogbox::setDate(format(Sys.Date(),'%Y-%m-%d'))
 
 add(repo,'DESCRIPTION')
 

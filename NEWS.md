@@ -8,3 +8,4 @@
 versions of homologene. Using `homologeneData2` as a baseline with this function
 allows faster updates.
 * `getGeneHistory`, `updateIDs` and `getGeneInfo` functions are added to allow users to update arbitrary gene lists with latest symbols and identifiers.
+* All species originally repsented in the homologene database are added to the package.
