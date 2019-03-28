@@ -2,12 +2,12 @@ context('homologene testing')
 
 test_that('Multiple orthologues',{
     humanOrthos = human2mouse(c("GZMH"))
-    expect_that(humanOrthos$mouseGene,equals(c('Gzmd','Gzme','Gzmg','Gzmf')))
+    expect_equal(humanOrthos$mouseGene,c('Gzmd','Gzme','Gzmg','Gzmf'))
 })
 
 test_that('Regular functionality',{
-    expect_that(mouse2human(c('Eno2','Mog'))$humanGene,equals(c('ENO2','MOG')))
-    expect_that(dim(mouse2human(c('lolwut'))), equals(c(0,4)))
+    expect_equal(mouse2human(c('Eno2','Mog'))$humanGene,c('ENO2','MOG'))
+    expect_equal(dim(mouse2human(c('lolwut'))), c(0,4))
 })
 
 test_that('Other species',{
@@ -70,14 +70,39 @@ test_that('homologene2',{
         genes
     
     expect_true(nrow(genes)==0)
+
 })
 
+
+test_that('Updating gene ',{
+    
+    testIds = c(102978083,102976710,102975981)
+    
+    gene_history = getGeneHistory('testfiles/gene_history_trimmed.tsv',justRead = TRUE)
+    
+    # earlierst_date = gene_history %>%
+    #     dplyr::filter(Discontinued_GeneID %in% testIds) %$%
+    #     Discontinue_Date %>% 
+    #     {suppressWarnings(min(.))}
+    # 
+    # gene_history %<>%
+    #     dplyr::filter(Discontinue_Date >= earlierst_date
+    #     )
+    # 
+    # readr::write_tsv(gene_history,'testfiles/gene_history_trimmed.tsv')
+    
+    updatedGenes = updateIDs(testIds,gene_history)
+    
+    testthat::expect_is(updatedGenes,'character')
+    testthat::expect_length(updatedGenes,3)
+    
+})
 
 
 test_that('Detached behaviour',{
     detach("package:homologene", unload=TRUE)
-    expect_that(homologene::mouse2human(c('Eno2','Mog'))$humanGene,equals(c('ENO2','MOG')))
-    expect_that(dim(homologene::human2mouse(c('lolwut'))), equals(c(0,4)))
+    expect_equal(homologene::mouse2human(c('Eno2','Mog'))$humanGene,c('ENO2','MOG'))
+    expect_equal(dim(homologene::human2mouse(c('lolwut'))), c(0,4))
 })
 
 

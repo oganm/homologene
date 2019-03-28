@@ -9,7 +9,7 @@ autoTranslate(genes, targetGenes, possibleOrigins = NULL,
   db = homologene::homologeneData)
 }
 \arguments{
-\item{genes}{A list of genes to match the target}
+\item{genes}{A list of genes to match the target. Symbols or NCBI ids}
 
 \item{targetGenes}{The target list. This list is supposed to represent a large number of genes
 from the target species.}

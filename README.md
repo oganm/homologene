@@ -5,7 +5,7 @@
 Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene)
 [![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene)
 [![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene)
-[![](https://img.shields.io/badge/devel%20version-1.2.68.19.2.24-blue.svg)](https://github.com/oganm/homologene)
+[![](https://img.shields.io/badge/devel%20version-1.4.68.19.3.26-blue.svg)](https://github.com/oganm/homologene)
 
 An r package that works as a wrapper to homologene
 
@@ -98,10 +98,12 @@ human2mouse(c('ENO2','MOG','GZMH'))
 
 # homologeneData2
 
-The package also includes an updated version of the homologene database.
-For the procedure followed for updating, see [this blog
+Original homologene database has not been updated since 2014. This
+package also includes an updated version of the homologene database that
+replaces gene symbols and identifiers with the their latest version. For
+the procedure followed for updating, see [this blog
 post](https://oganm.com/homologene-update/) and/or see the [processing
-code](process/prepHomologene2.R).
+code](R/updateHomologene.R).
 
 Using the updated version can help you match genes that cannot matched
 due to out of date annotations.
@@ -130,12 +132,78 @@ mouse2human(c('Mesd',
     ## 3    Cstdc4      CSTA  433016    1475
     ## 4    Ifit3b     IFIT3  667370    3437
 
+The `homologeneData2` object that comes with the GitHub version of this
+package is updated weekly but if you are using the CRAN version and want
+the latest annotations, or if you want to keep a frozen version
+homologene, you can use the `updateHomologene`
+function.
+
+``` r
+homologeneDataVeryNew = updateHomologene() # update the homologene database with the latest identifiers
+
+mouse2human(c('Mesd',
+              'Trp53rka',
+              'Cstdc4',
+              'Ifit3b'),
+            db = homologeneDataVeryNew)
+```
+
+# Gene ID syncronization
+
+The package also includes functions that were used to create the
+`homologeneData2`, for updating outdated gene symbols and identifiers.
+
+``` r
+library(dplyr)
+```
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following object is masked from 'package:testthat':
+    ## 
+    ##     matches
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
+``` r
+gene_history = getGeneHistory()
+oldIds = c(4340964, 4349034, 4332470, 4334151, 4323831)
+newIds = updateIDs(oldIds,gene_history)
+print(newIds)
+```
+
+    ## [1] "9267698" "4349033" "4332468" "4334150" "4324017"
+
+``` r
+# get the latest gene symbols for the ids
+
+gene_info = getGeneInfo()
+
+gene_info %>%
+    dplyr::filter(GeneID %in% as.integer(newIds)) # faster to match integers
+```
+
+    ## # A tibble: 5 x 3
+    ##   tax_id  GeneID Symbol    
+    ##    <int>   <int> <chr>     
+    ## 1  39947 4324017 LOC4324017
+    ## 2  39947 4332468 LOC4332468
+    ## 3  39947 4334150 LOC4334150
+    ## 4  39947 4349033 LOC4349033
+    ## 5  39947 9267698 LOC9267698
+
 # Mishaps
 
 As of version version 1.1.68, the output now includes NCBI ids. Since it
 doesn’t change any of the existing column names or their order, this
-shouldn’t cause problems in most use cases. If this is an issue for you
-plase notify me.
+shouldn’t cause problems in most use cases.
 
 If a you can’t find a gene you are looking for it may have synonyms. See
 [geneSynonym](https://github.com/oganm/geneSynonym.git) package to find
