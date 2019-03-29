@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get homologues of given genes — homologene • homologene</title>
+<title>License • homologene</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -25,15 +25,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
-<link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script>
+<link href="pkgdown.css" rel="stylesheet">
+<script src="pkgdown.js"></script>
 
 
 
-<meta property="og:title" content="Get homologues of given genes — homologene" />
-
-<meta property="og:description" content="Given a list of genes and a taxid, returns a data frame inlcuding the genes and their corresponding homologues" />
-<meta name="twitter:card" content="summary" />
+<meta property="og:title" content="License" />
 
 
 
@@ -50,7 +47,7 @@
   </head>
 
   <body>
-    <div class="container template-reference-topic">
+    <div class="container template-title-body">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -62,7 +59,7 @@
         <span class="icon-bar"></span>
       </button>
       <span class="navbar-brand">
-        <a class="navbar-link" href="../index.html">homologene</a>
+        <a class="navbar-link" href="index.html">homologene</a>
         <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.68.19.3.27</span>
       </span>
     </div>
@@ -70,16 +67,16 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../index.html">
+  <a href="index.html">
     <span class="fa fa-home fa-lg"></span>
      
   </a>
 </li>
 <li>
-  <a href="../reference/index.html">Reference</a>
+  <a href="reference/index.html">Reference</a>
 </li>
 <li>
-  <a href="../news/index.html">Changelog</a>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
       
@@ -100,58 +97,19 @@
       </header>
 
 <div class="row">
-  <div class="col-md-9 contents">
+  <div class="contents col-md-9">
     <div class="page-header">
-    <h1>Get homologues of given genes</h1>
-    <small class="dont-index">Source: <a href='https://github.com/oganm/homologene/blob/master/R/homologene.R'><code>R/homologene.R</code></a></small>
-    <div class="hidden name"><code>homologene.Rd</code></div>
+      <h1>License</h1>
     </div>
 
-    <div class="ref-description">
-    
-    <p>Given a list of genes and a taxid, returns a data frame inlcuding the genes and their corresponding homologues</p>
-    
-    </div>
-
-    <pre class="usage"><span class='fu'>homologene</span>(<span class='no'>genes</span>, <span class='no'>inTax</span>, <span class='no'>outTax</span>, <span class='kw'>db</span> <span class='kw'>=</span> <span class='kw pkg'>homologene</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/homologene/topics/homologeneData'>homologeneData</a></span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>genes</th>
-      <td><p>A vector of gene symbols or NCBI ids</p></td>
-    </tr>
-    <tr>
-      <th>inTax</th>
-      <td><p>taxid of the species that the input genes are coming from</p></td>
-    </tr>
-    <tr>
-      <th>outTax</th>
-      <td><p>taxid of the species that you are seeking homology</p></td>
-    </tr>
-    <tr>
-      <th>db</th>
-      <td><p>Homologene database to use.</p></td>
-    </tr>
-    </table>
-    
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>homologene</span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'Eno2'</span>,<span class='st'>'17441'</span>), <span class='kw'>inTax</span> <span class='kw'>=</span> <span class='fl'>10090</span>, <span class='kw'>outTax</span> <span class='kw'>=</span> <span class='fl'>9606</span>)</div><div class='output co'>#&gt;   10090 9606 10090_ID 9606_ID
-#&gt; 1  Eno2 ENO2    13807    2026
-#&gt; 2   Mog  MOG    17441    4340</div></pre>
-  </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
+<pre>YEAR: 2019
+COPYRIGHT HOLDER: Ogan Mancarci
+</pre>
 
   </div>
+
 </div>
+
 
       <footer>
       <div class="copyright">

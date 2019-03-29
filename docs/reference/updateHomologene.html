@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Attempt to automatically translate a gene list — autoTranslate • homologene</title>
+<title>Update homologene database — updateHomologene • homologene</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,17 +30,13 @@
 
 
 
-<meta property="og:title" content="Attempt to automatically translate a gene list — autoTranslate" />
+<meta property="og:title" content="Update homologene database — updateHomologene" />
 
-<meta property="og:description" content="Given a list of query gene list and a target gene list, the function
-tries find the homology pairing that matches the query list to the target list. The query list
-is a short list of genes while the target list is supposed to represent a large number of genes from the target
-species. The default output will be the largest possible list. If returnAllPossible = TRUE then
-all possible pairings with any matches are returned. It is possible to limit the
-search by setting possibleOrigins and possibleTargets. Note that gene symbols of some species
-are more similar to each other than others. Using this with small gene lists and without providing any
-possibleOrigins or possibleTargets might return multiple hits, or if returnAllPossible = TRUE
-a wrong match can be returned." />
+<meta property="og:description" content="Creates an updated version of the homologene database. This is done by downloading
+the latest gene annotation information and tracing changes in gene symbols and 
+identifiers over history. homologeneData2 was created using 
+this function over the original homologeneData. This function 
+requires downloading large amounts of data from the NCBI ftp servers." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,62 +106,60 @@ a wrong match can be returned." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Attempt to automatically translate a gene list</h1>
-    <small class="dont-index">Source: <a href='https://github.com/oganm/homologene/blob/master/R/autoTranslate.R'><code>R/autoTranslate.R</code></a></small>
-    <div class="hidden name"><code>autoTranslate.Rd</code></div>
+    <h1>Update homologene database</h1>
+    <small class="dont-index">Source: <a href='https://github.com/oganm/homologene/blob/master/R/updateHomologene.R'><code>R/updateHomologene.R</code></a></small>
+    <div class="hidden name"><code>updateHomologene.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Given a list of query gene list and a target gene list, the function
-tries find the homology pairing that matches the query list to the target list. The query list
-is a short list of genes while the target list is supposed to represent a large number of genes from the target
-species. The default output will be the largest possible list. If <code>returnAllPossible = TRUE</code> then
-all possible pairings with any matches are returned. It is possible to limit the
-search by setting <code>possibleOrigins</code> and <code>possibleTargets</code>. Note that gene symbols of some species
-are more similar to each other than others. Using this with small gene lists and without providing any
-<code>possibleOrigins</code> or <code>possibleTargets</code> might return multiple hits, or if <code>returnAllPossible = TRUE</code>
-a wrong match can be returned.</p>
+    <p>Creates an updated version of the homologene database. This is done by downloading
+the latest gene annotation information and tracing changes in gene symbols and 
+identifiers over history. <code><a href='homologeneData2.html'>homologeneData2</a></code> was created using 
+this function over the original <code><a href='homologeneData.html'>homologeneData</a></code>. This function 
+requires downloading large amounts of data from the NCBI ftp servers.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>autoTranslate</span>(<span class='no'>genes</span>, <span class='no'>targetGenes</span>, <span class='kw'>possibleOrigins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>possibleTargets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>returnAllPossible</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>db</span> <span class='kw'>=</span> <span class='kw pkg'>homologene</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/homologene/topics/homologeneData'>homologeneData</a></span>)</pre>
+    <pre class="usage"><span class='fu'>updateHomologene</span>(<span class='kw'>destfile</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>baseline</span> <span class='kw'>=</span> <span class='kw pkg'>homologene</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/homologene/topics/homologeneData2'>homologeneData2</a></span>, <span class='kw'>gene_history</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>gene_info</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>genes</th>
-      <td><p>A list of genes to match the target. Symbols or NCBI ids</p></td>
+      <th>destfile</th>
+      <td><p>Optional. Path of the output file.</p></td>
     </tr>
     <tr>
-      <th>targetGenes</th>
-      <td><p>The target list. This list is supposed to represent a large number of genes
-from the target species.</p></td>
+      <th>baseline</th>
+      <td><p>The baseline homologene file to be used. By default uses the
+<code><a href='homologeneData2.html'>homologeneData2</a></code> that is included in this package. The more ids 
+to update, the more time is needed for the update which is why the default option
+uses an already updated version of the original database.</p></td>
     </tr>
     <tr>
-      <th>possibleOrigins</th>
-      <td><p>Taxonomic identifiers of possible origin species</p></td>
+      <th>gene_history</th>
+      <td><p>A gene history data frame, possibly returned by <code><a href='getGeneHistory.html'>getGeneHistory</a></code>
+function. Use this if you want to have a static gene_history file to update up to a specific date.
+An up to date gene_history object can be set to update to a specific date by trimming
+rows that have recent dates. Note that the same is not possible for the gene_info 
+If not provided, the latest file will be downloaded.</p></td>
     </tr>
     <tr>
-      <th>possibleTargets</th>
-      <td><p>Taxonomic identifiers of possible target species</p></td>
-    </tr>
-    <tr>
-      <th>returnAllPossible</th>
-      <td><p>if TRUE returns all possible pairings with non zero gene matches. If FALSE (default) returns the best match</p></td>
-    </tr>
-    <tr>
-      <th>db</th>
-      <td><p>Homologene database to use.</p></td>
+      <th>gene_info</th>
+      <td><p>A gene info data frame that contatins ID-symbol matches,
+possibly returned by <code><a href='getGeneInfo.html'>getGeneInfo</a></code>. Use this if you
+want a static version. Should be in sync with the gene_history file. Note that there is 
+no easy way to track changes in gene symbols back in time so if you want to update it up
+to a specific date, make sure you don't lose that file.</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A data frame if <code>returnAllPossibe = FALSE</code> and a list of data frames if <code>TRUE</code></p>
+    <p>Homologene database in a data frame with updated gene IDs and symbols</p>
     
 
   </div>

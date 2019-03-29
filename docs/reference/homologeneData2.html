@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Attempt to automatically translate a gene list — autoTranslate • homologene</title>
+<title>homologeneData2 — homologeneData2 • homologene</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,17 +30,11 @@
 
 
 
-<meta property="og:title" content="Attempt to automatically translate a gene list — autoTranslate" />
+<meta property="og:title" content="homologeneData2 — homologeneData2" />
 
-<meta property="og:description" content="Given a list of query gene list and a target gene list, the function
-tries find the homology pairing that matches the query list to the target list. The query list
-is a short list of genes while the target list is supposed to represent a large number of genes from the target
-species. The default output will be the largest possible list. If returnAllPossible = TRUE then
-all possible pairings with any matches are returned. It is possible to limit the
-search by setting possibleOrigins and possibleTargets. Note that gene symbols of some species
-are more similar to each other than others. Using this with small gene lists and without providing any
-possibleOrigins or possibleTargets might return multiple hits, or if returnAllPossible = TRUE
-a wrong match can be returned." />
+<meta property="og:description" content="A modified copy of the homologene database. Homologene was updated at 2014 and many of its gene IDs and
+symbols are out of date. Here the IDs and symbols are replaced with their most current version
+Last update: Wed Mar 27 16:34:11 2019" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -110,71 +104,32 @@ a wrong match can be returned." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Attempt to automatically translate a gene list</h1>
-    <small class="dont-index">Source: <a href='https://github.com/oganm/homologene/blob/master/R/autoTranslate.R'><code>R/autoTranslate.R</code></a></small>
-    <div class="hidden name"><code>autoTranslate.Rd</code></div>
+    <h1>homologeneData2</h1>
+    <small class="dont-index">Source: <a href='https://github.com/oganm/homologene/blob/master/R/homologeneData2.R'><code>R/homologeneData2.R</code></a></small>
+    <div class="hidden name"><code>homologeneData2.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Given a list of query gene list and a target gene list, the function
-tries find the homology pairing that matches the query list to the target list. The query list
-is a short list of genes while the target list is supposed to represent a large number of genes from the target
-species. The default output will be the largest possible list. If <code>returnAllPossible = TRUE</code> then
-all possible pairings with any matches are returned. It is possible to limit the
-search by setting <code>possibleOrigins</code> and <code>possibleTargets</code>. Note that gene symbols of some species
-are more similar to each other than others. Using this with small gene lists and without providing any
-<code>possibleOrigins</code> or <code>possibleTargets</code> might return multiple hits, or if <code>returnAllPossible = TRUE</code>
-a wrong match can be returned.</p>
+    <p>A modified copy of the homologene database. Homologene was updated at 2014 and many of its gene IDs and
+symbols are out of date. Here the IDs and symbols are replaced with their most current version
+Last update: Wed Mar 27 16:34:11 2019</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>autoTranslate</span>(<span class='no'>genes</span>, <span class='no'>targetGenes</span>, <span class='kw'>possibleOrigins</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>possibleTargets</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>returnAllPossible</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>db</span> <span class='kw'>=</span> <span class='kw pkg'>homologene</span><span class='kw ns'>::</span><span class='no'><a href='https://www.rdocumentation.org/packages/homologene/topics/homologeneData'>homologeneData</a></span>)</pre>
-    
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>genes</th>
-      <td><p>A list of genes to match the target. Symbols or NCBI ids</p></td>
-    </tr>
-    <tr>
-      <th>targetGenes</th>
-      <td><p>The target list. This list is supposed to represent a large number of genes
-from the target species.</p></td>
-    </tr>
-    <tr>
-      <th>possibleOrigins</th>
-      <td><p>Taxonomic identifiers of possible origin species</p></td>
-    </tr>
-    <tr>
-      <th>possibleTargets</th>
-      <td><p>Taxonomic identifiers of possible target species</p></td>
-    </tr>
-    <tr>
-      <th>returnAllPossible</th>
-      <td><p>if TRUE returns all possible pairings with non zero gene matches. If FALSE (default) returns the best match</p></td>
-    </tr>
-    <tr>
-      <th>db</th>
-      <td><p>Homologene database to use.</p></td>
-    </tr>
-    </table>
-    
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <pre class="usage"><span class='no'>homologeneData2</span></pre>
+        
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>A data frame if <code>returnAllPossibe = FALSE</code> and a list of data frames if <code>TRUE</code></p>
+    <p>An object of class <code>data.frame</code> with 269592 rows and 4 columns.</p>
     
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
       
-      <li><a href="#value">Value</a></li>
+      <li><a href="#format">Format</a></li>
           </ul>
 
   </div>
