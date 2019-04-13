@@ -58,7 +58,7 @@ ogbox::setDate(format(Sys.Date(),'%Y-%m-%d'))
 
 add(repo,'DESCRIPTION')
 
-knitr::knit('README.rmd')
+rmarkdown::render('README.rmd')
 
 add(repo,'README.md')
 
