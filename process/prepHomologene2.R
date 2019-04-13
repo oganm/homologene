@@ -58,6 +58,10 @@ ogbox::setDate(format(Sys.Date(),'%Y-%m-%d'))
 
 add(repo,'DESCRIPTION')
 
+knitr::knit('README.rmd')
+
+add(repo,'README.md')
+
 git2r::commit(repo,message = 'homologeneData2 automatic update')
 
 
@@ -65,3 +69,4 @@ token = readLines('data-raw/auth')
 Sys.setenv(GITHUB_PAT = token)
 cred = git2r::cred_token()
 git2r::push(repo,credentials = cred)
+
