@@ -42,9 +42,13 @@ devtools::document()
 # github stuff --------------
 repo = repository('.')
 add(repo,'R/homologeneData2.R')
+Sys.sleep(1)
 add(repo,'data/homologeneData2.rda')
+Sys.sleep(1)
 add(repo,'man/homologeneData2.Rd')
+Sys.sleep(1)
 add(repo,'data-raw/homologene2.tsv')
+Sys.sleep(1)
 
 version = getVersion()
 version %<>% strsplit('\\.') %>% {.[[1]]}
@@ -57,12 +61,14 @@ setVersion(paste(version,collapse = '.'))
 ogbox::setDate(format(Sys.Date(),'%Y-%m-%d'))
 
 add(repo,'DESCRIPTION')
+Sys.sleep(1)
 
 rmarkdown::render('README.rmd')
 
 add(repo,'README.md')
 
 git2r::commit(repo,message = 'homologeneData2 automatic update')
+Sys.sleep(1)
 
 
 token = readLines('data-raw/auth')
