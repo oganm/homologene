@@ -4,13 +4,13 @@
 \name{homologeneData2}
 \alias{homologeneData2}
 \title{homologeneData2}
-\format{An object of class \code{data.frame} with 269593 rows and 4 columns.}
+\format{An object of class \code{data.frame} with 269545 rows and 4 columns.}
 \usage{
 homologeneData2
 }
 \description{
 A modified copy of the homologene database. Homologene was updated at 2014 and many of its gene IDs and
 symbols are out of date. Here the IDs and symbols are replaced with their most current version
-Last update: Wed Apr 24 17:52:29 2019
+Last update: Wed May  1 13:56:12 2019
 }
 \keyword{datasets}
