@@ -14,5 +14,8 @@ diopt(genes, inTax, outTax)
 \item{outTax}{taxid of the species that you are seeking homology}
 }
 \description{
-Query DIOPT database
+Query DIOPT database (\url{https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl}) for orthologues.
+DIOPT database uses multiple tools to find gene orthologues. Sadly they don't have an
+API so this function queries by visiting the site and filling up the form while obeying
+their robots.txt. All queries will take a minimum of 10 seconds due to crawl delay.
 }

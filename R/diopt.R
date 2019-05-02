@@ -1,6 +1,11 @@
 
 
 #' Query DIOPT database
+#' 
+#' Query DIOPT database (\url{https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl}) for orthologues.
+#' DIOPT database uses multiple tools to find gene orthologues. Sadly they don't have an
+#' API so this function queries by visiting the site and filling up the form while obeying
+#' their robots.txt. All queries will take a minimum of 10 seconds due to crawl delay.
 #'
 #' @param genes  A vector of gene identifiers. Anything that DIOPT accepts
 #' @param inTax taxid of the species that the input genes are coming from
