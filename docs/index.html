@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">homologene</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.68.19.3.27</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.68.19.5.1</span>
       </span>
     </div>
 
@@ -114,20 +114,20 @@
 <h1 class="hasAnchor">
 <a href="#usage" class="anchor"></a>Usage</h1>
 <p>Basic homologene function requires a list of gene symbols or NCBI ids, and an <code>inTax</code> and an <code>outTax</code>. In this example, <code>inTax</code> is the taxon id of <em>mus musculus</em> while <code>outTax</code> is for humans.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="reference/homologene.html">homologene</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Eno2'</span>,<span class="st">'Mog'</span>), <span class="dt">inTax =</span> <span class="dv">10090</span>, <span class="dt">outTax =</span> <span class="dv">9606</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">homologene</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Eno2'</span>,<span class="st">'Mog'</span>), <span class="dt">inTax =</span> <span class="dv">10090</span>, <span class="dt">outTax =</span> <span class="dv">9606</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">##   10090 9606 10090_ID 9606_ID</span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="co">## 1  Eno2 ENO2    13807    2026</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="co">## 2   Mog  MOG    17441    4340</span></a></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="reference/homologene.html">homologene</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Eno2'</span>,<span class="st">'17441'</span>), <span class="dt">inTax =</span> <span class="dv">10090</span>, <span class="dt">outTax =</span> <span class="dv">9606</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">homologene</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Eno2'</span>,<span class="st">'17441'</span>), <span class="dt">inTax =</span> <span class="dv">10090</span>, <span class="dt">outTax =</span> <span class="dv">9606</span>)</a></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co">##   10090 9606 10090_ID 9606_ID</span></a>
 <a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co">## 1  Eno2 ENO2    13807    2026</span></a>
 <a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co">## 2   Mog  MOG    17441    4340</span></a></code></pre></div>
 <p>For mouse and humans two convenience functions exist that removes the need to provide taxonomic identifiers. Note that the column names are not the same as the <code>homologene</code> output.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="reference/mouse2human.html">mouse2human</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Eno2'</span>,<span class="st">'Mog'</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">mouse2human</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Eno2'</span>,<span class="st">'Mog'</span>))</a></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="co">##   mouseGene humanGene mouseID humanID</span></a>
 <a class="sourceLine" id="cb10-2" data-line-number="2"><span class="co">## 1      Eno2      ENO2   13807    2026</span></a>
 <a class="sourceLine" id="cb10-3" data-line-number="3"><span class="co">## 2       Mog       MOG   17441    4340</span></a></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="reference/human2mouse.html">human2mouse</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'ENO2'</span>,<span class="st">'MOG'</span>,<span class="st">'GZMH'</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">human2mouse</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'ENO2'</span>,<span class="st">'MOG'</span>,<span class="st">'GZMH'</span>))</a></code></pre></div>
 <div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">##   humanGene mouseGene humanID mouseID</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">## 1      ENO2      Eno2    2026   13807</span></a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">## 2       MOG       Mog    4340   17441</span></a>
@@ -141,13 +141,13 @@
 <a href="#homologenedata2" class="anchor"></a>homologeneData2</h1>
 <p>Original homologene database has not been updated since 2014. This package also includes an updated version of the homologene database that replaces gene symbols and identifiers with the their latest version. For the procedure followed for updating, see <a href="https://oganm.com/homologene-update/">this blog post</a> and/or see the <a href="R/updateHomologene.R">processing code</a>.</p>
 <p>Using the updated version can help you match genes that cannot matched due to out of date annotations.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="reference/mouse2human.html">mouse2human</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Mesd'</span>,</a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">mouse2human</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Mesd'</span>,</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2">              <span class="st">'Trp53rka'</span>,</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3">              <span class="st">'Cstdc4'</span>,</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4">              <span class="st">'Ifit3b'</span>))</a></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">## [1] mouseGene humanGene mouseID   humanID  </span></a>
 <a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">## &lt;0 rows&gt; (or 0-length row.names)</span></a></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="reference/mouse2human.html">mouse2human</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Mesd'</span>,</a>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">mouse2human</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Mesd'</span>,</a>
 <a class="sourceLine" id="cb15-2" data-line-number="2">              <span class="st">'Trp53rka'</span>,</a>
 <a class="sourceLine" id="cb15-3" data-line-number="3">              <span class="st">'Cstdc4'</span>,</a>
 <a class="sourceLine" id="cb15-4" data-line-number="4">              <span class="st">'Ifit3b'</span>),</a>
@@ -158,9 +158,9 @@
 <a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">## 3    Cstdc4      CSTA  433016    1475</span></a>
 <a class="sourceLine" id="cb16-5" data-line-number="5"><span class="co">## 4    Ifit3b     IFIT3  667370    3437</span></a></code></pre></div>
 <p>The <code>homologeneData2</code> object that comes with the GitHub version of this package is updated weekly but if you are using the CRAN version and want the latest annotations, or if you want to keep a frozen version homologene, you can use the <code>updateHomologene</code> function.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">homologeneDataVeryNew =<span class="st"> </span><span class="kw"><a href="reference/updateHomologene.html">updateHomologene</a></span>() <span class="co"># update the homologene database with the latest identifiers</span></a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">homologeneDataVeryNew =<span class="st"> </span><span class="kw">updateHomologene</span>() <span class="co"># update the homologene database with the latest identifiers</span></a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw"><a href="reference/mouse2human.html">mouse2human</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Mesd'</span>,</a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="kw">mouse2human</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Mesd'</span>,</a>
 <a class="sourceLine" id="cb17-4" data-line-number="4">              <span class="st">'Trp53rka'</span>,</a>
 <a class="sourceLine" id="cb17-5" data-line-number="5">              <span class="st">'Cstdc4'</span>,</a>
 <a class="sourceLine" id="cb17-6" data-line-number="6">              <span class="st">'Ifit3b'</span>),</a>
@@ -185,14 +185,14 @@
 <a class="sourceLine" id="cb19-12" data-line-number="12"><span class="co">## The following objects are masked from 'package:base':</span></a>
 <a class="sourceLine" id="cb19-13" data-line-number="13"><span class="co">## </span></a>
 <a class="sourceLine" id="cb19-14" data-line-number="14"><span class="co">##     intersect, setdiff, setequal, union</span></a></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">gene_history =<span class="st"> </span><span class="kw"><a href="reference/getGeneHistory.html">getGeneHistory</a></span>()</a>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">gene_history =<span class="st"> </span><span class="kw">getGeneHistory</span>()</a>
 <a class="sourceLine" id="cb20-2" data-line-number="2">oldIds =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">4340964</span>, <span class="dv">4349034</span>, <span class="dv">4332470</span>, <span class="dv">4334151</span>, <span class="dv">4323831</span>)</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3">newIds =<span class="st"> </span><span class="kw"><a href="reference/updateIDs.html">updateIDs</a></span>(oldIds,gene_history)</a>
+<a class="sourceLine" id="cb20-3" data-line-number="3">newIds =<span class="st"> </span><span class="kw">updateIDs</span>(oldIds,gene_history)</a>
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(newIds)</a></code></pre></div>
 <div class="sourceCode" id="cb21"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co">## [1] "9267698" "4349033" "4332468" "4334150" "4324017"</span></a></code></pre></div>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co"># get the latest gene symbols for the ids</span></a>
 <a class="sourceLine" id="cb22-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb22-3" data-line-number="3">gene_info =<span class="st"> </span><span class="kw"><a href="reference/getGeneInfo.html">getGeneInfo</a></span>()</a>
+<a class="sourceLine" id="cb22-3" data-line-number="3">gene_info =<span class="st"> </span><span class="kw">getGeneInfo</span>()</a>
 <a class="sourceLine" id="cb22-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb22-5" data-line-number="5">gene_info <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb22-6" data-line-number="6"><span class="st">    </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(GeneID <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/integer">as.integer</a></span>(newIds)) <span class="co"># faster to match integers</span></a></code></pre></div>
@@ -247,7 +247,7 @@
 <li><a href="https://travis-ci.org/oganm/homologene"><img src="https://travis-ci.org/oganm/homologene.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://codecov.io/gh/oganm/homologene"><img src="https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://cran.r-project.org/package=homologene"><img src="https://www.r-pkg.org/badges/version/homologene?color=#32BD36"></a></li>
-<li><a href="https://github.com/oganm/homologene"><img src="https://img.shields.io/badge/devel%20version-1.4.68.19.3.27-blue.svg"></a></li>
+<li><a href="https://github.com/oganm/homologene"><img src="https://img.shields.io/badge/devel%20version-1.4.68.19.4.21-blue.svg"></a></li>
 </ul>
 </div>
 </div>

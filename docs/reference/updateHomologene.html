@@ -67,7 +67,7 @@ requires downloading large amounts of data from the NCBI ftp servers." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">homologene</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.68.19.3.27</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.68.19.5.1</span>
       </span>
     </div>
 
@@ -115,8 +115,8 @@ requires downloading large amounts of data from the NCBI ftp servers." />
     
     <p>Creates an updated version of the homologene database. This is done by downloading
 the latest gene annotation information and tracing changes in gene symbols and 
-identifiers over history. <code><a href='homologeneData2.html'>homologeneData2</a></code> was created using 
-this function over the original <code><a href='homologeneData.html'>homologeneData</a></code>. This function 
+identifiers over history. <code>homologeneData2</code> was created using 
+this function over the original <code>homologeneData</code>. This function 
 requires downloading large amounts of data from the NCBI ftp servers.</p>
     
     </div>
@@ -135,13 +135,13 @@ requires downloading large amounts of data from the NCBI ftp servers.</p>
     <tr>
       <th>baseline</th>
       <td><p>The baseline homologene file to be used. By default uses the
-<code><a href='homologeneData2.html'>homologeneData2</a></code> that is included in this package. The more ids 
+<code>homologeneData2</code> that is included in this package. The more ids 
 to update, the more time is needed for the update which is why the default option
 uses an already updated version of the original database.</p></td>
     </tr>
     <tr>
       <th>gene_history</th>
-      <td><p>A gene history data frame, possibly returned by <code><a href='getGeneHistory.html'>getGeneHistory</a></code>
+      <td><p>A gene history data frame, possibly returned by <code>getGeneHistory</code>
 function. Use this if you want to have a static gene_history file to update up to a specific date.
 An up to date gene_history object can be set to update to a specific date by trimming
 rows that have recent dates. Note that the same is not possible for the gene_info 
@@ -150,7 +150,7 @@ If not provided, the latest file will be downloaded.</p></td>
     <tr>
       <th>gene_info</th>
       <td><p>A gene info data frame that contatins ID-symbol matches,
-possibly returned by <code><a href='getGeneInfo.html'>getGeneInfo</a></code>. Use this if you
+possibly returned by <code>getGeneInfo</code>. Use this if you
 want a static version. Should be in sync with the gene_history file. Note that there is 
 no easy way to track changes in gene symbols back in time so if you want to update it up
 to a specific date, make sure you don't lose that file.</p></td>

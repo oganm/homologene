@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Objects exported from other packages — reexports • homologene</title>
+<title>Query DIOPT database — diopt • homologene</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,13 +30,9 @@
 
 
 
-<meta property="og:title" content="Objects exported from other packages — reexports" />
+<meta property="og:title" content="Query DIOPT database — diopt" />
 
-<meta property="og:description" content="These objects are imported from other packages. Follow the links
-below to see their documentation.
-
-  magrittr%&amp;gt;%, %&amp;lt;&amp;gt;%, %$%
-" />
+<meta property="og:description" content="Query DIOPT database" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -106,27 +102,42 @@ below to see their documentation.
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Objects exported from other packages</h1>
-    <small class="dont-index">Source: <a href='https://github.com/oganm/homologene/blob/master/R/import.R'><code>R/import.R</code></a></small>
-    <div class="hidden name"><code>reexports.Rd</code></div>
+    <h1>Query DIOPT database</h1>
+    <small class="dont-index">Source: <a href='https://github.com/oganm/homologene/blob/master/R/diopt.R'><code>R/diopt.R</code></a></small>
+    <div class="hidden name"><code>diopt.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>These objects are imported from other packages. Follow the links
-below to see their documentation.</p>
-<dl class='dl-horizontal'>
-  <dt>magrittr</dt><dd><p><code>%&gt;%</code>, <code>%&lt;&gt;%</code>, <code><a href='https://www.rdocumentation.org/packages/magrittr/topics/exposition'>%$%</a></code></p></dd>
-</dl>
+    <p>Query DIOPT database</p>
     
     </div>
 
-        
+    <pre class="usage"><span class='fu'>diopt</span>(<span class='no'>genes</span>, <span class='no'>inTax</span>, <span class='no'>outTax</span>)</pre>
+    
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>genes</th>
+      <td><p>A vector of gene identifiers. Anything that DIOPT accepts</p></td>
+    </tr>
+    <tr>
+      <th>inTax</th>
+      <td><p>taxid of the species that the input genes are coming from</p></td>
+    </tr>
+    <tr>
+      <th>outTax</th>
+      <td><p>taxid of the species that you are seeking homology</p></td>
+    </tr>
+    </table>
+    
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
+      <li><a href="#arguments">Arguments</a></li>
                 </ul>
 
   </div>
