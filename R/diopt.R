@@ -10,8 +10,8 @@
 #' @export
 #'
 diopt = function(genes, inTax, outTax){
-    robots = readLines('https://www.flyrnai.org/robots.txt')
-    delay = as.integer(gsub('Crawl-delay: ','',robots[grepl('Crawl-delay',robots)]))
+    rtxt = robotstxt::robotstxt(domain = "flyrnai.org")
+    delay = rtxt$crawl_delay %>% filter(useragent =='*') %$% value %>% as.integer()
     session = rvest::html_session('https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl')
     form = rvest::html_form(session)[[1]]
     
