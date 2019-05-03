@@ -31,6 +31,13 @@ diopt = function(genes, inTax, outTax){
                              output_species = outTax,
                              gene_list = paste(genes,collapse = '\n\r'))
     
+    additional_filters = which(names(form$fields) == 'additional_filter')
+    
+    additional_filter_names = form$fields[additional_filters] %>% purrr::map_chr('value')
+    
+    form$fields[additional_filters][additional_filter_names %in% 'None'][[1]]$checked = 'checked'
+    form$fields[additional_filters][additional_filter_names %in% 'NoLow'][[1]]$checked = NULL
+    
     Sys.sleep(delay)
     
     response = rvest::submit_form(session,form)
