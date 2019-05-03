@@ -4,7 +4,7 @@
 \alias{diopt}
 \title{Query DIOPT database}
 \usage{
-diopt(genes, inTax, outTax)
+diopt(genes, inTax, outTax, delay = 10)
 }
 \arguments{
 \item{genes}{A vector of gene identifiers. Anything that DIOPT accepts}
@@ -12,10 +12,14 @@ diopt(genes, inTax, outTax)
 \item{inTax}{taxid of the species that the input genes are coming from}
 
 \item{outTax}{taxid of the species that you are seeking homology}
+
+\item{delay}{How many seconds of delay should be between queries. Default is 10
+based on the robots.txt at the time this function is written.}
 }
 \description{
 Query DIOPT database (\url{https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl}) for orthologues.
 DIOPT database uses multiple tools to find gene orthologues. Sadly they don't have an
-API so this function queries by visiting the site and filling up the form while obeying
-their robots.txt. All queries will take a minimum of 10 seconds due to crawl delay.
+API so this function queries by visiting the site and filling up the form. By default
+each query will take a minimum of 10 seconds due to \code{delay} parameter. This
+is taken from their robots.txt
 }

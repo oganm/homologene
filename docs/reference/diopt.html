@@ -34,8 +34,9 @@
 
 <meta property="og:description" content="Query DIOPT database (https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl) for orthologues.
 DIOPT database uses multiple tools to find gene orthologues. Sadly they don't have an
-API so this function queries by visiting the site and filling up the form while obeying
-their robots.txt. All queries will take a minimum of 10 seconds due to crawl delay." />
+API so this function queries by visiting the site and filling up the form. By default
+each query will take a minimum of 10 seconds due to delay parameter. This
+is taken from their robots.txt" />
 <meta name="twitter:card" content="summary" />
 
 
@@ -114,12 +115,13 @@ their robots.txt. All queries will take a minimum of 10 seconds due to crawl del
     
     <p>Query DIOPT database (<a href='https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl'>https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl</a>) for orthologues.
 DIOPT database uses multiple tools to find gene orthologues. Sadly they don't have an
-API so this function queries by visiting the site and filling up the form while obeying
-their robots.txt. All queries will take a minimum of 10 seconds due to crawl delay.</p>
+API so this function queries by visiting the site and filling up the form. By default
+each query will take a minimum of 10 seconds due to <code>delay</code> parameter. This
+is taken from their robots.txt</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>diopt</span>(<span class='no'>genes</span>, <span class='no'>inTax</span>, <span class='no'>outTax</span>)</pre>
+    <pre class="usage"><span class='fu'>diopt</span>(<span class='no'>genes</span>, <span class='no'>inTax</span>, <span class='no'>outTax</span>, <span class='kw'>delay</span> <span class='kw'>=</span> <span class='fl'>10</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -135,6 +137,11 @@ their robots.txt. All queries will take a minimum of 10 seconds due to crawl del
     <tr>
       <th>outTax</th>
       <td><p>taxid of the species that you are seeking homology</p></td>
+    </tr>
+    <tr>
+      <th>delay</th>
+      <td><p>How many seconds of delay should be between queries. Default is 10
+based on the robots.txt at the time this function is written.</p></td>
     </tr>
     </table>
     
