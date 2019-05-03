@@ -1,3 +1,8 @@
+# homologene 1.5.68.x
+
+* Added `diopt` function to make queries at diopt database.
+* Further automatic updates to homologeneData2
+
 # homologene 1.4.68.19.3.24 (since 1.1.68)
 
 * Added a `NEWS.md` file to track changes to the package.
