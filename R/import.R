@@ -17,4 +17,7 @@ utils::globalVariables(c("Taxonomy",
                          "sortBy",
                          ".",
                          "Discontinued_GeneID",
-                         "Discontinue_Date"))
+                         "Discontinue_Date",
+                         "Gene2FunctionDetails",
+                         "Feedback",
+                         "Alignment & Scores"))
