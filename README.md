@@ -199,6 +199,8 @@ gene_info %>%
     ## 4  39947 4349033 LOC4349033
     ## 5  39947 9267698 LOC9267698
 
+# Querying DIOPT
+
 # Mishaps
 
 As of version version 1.1.68, the output now includes NCBI ids. Since it
