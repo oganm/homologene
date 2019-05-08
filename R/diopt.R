@@ -51,7 +51,7 @@ diopt = function(genes, inTax, outTax, delay = 10){
     
     output = response %>% 
         rvest::html_node('#results') %>% 
-        rvest::html_table %>% 
+        rvest::html_table() %>% 
         dplyr::select(-`Gene2FunctionDetails`,-`Feedback`,-`Alignment & Scores`)
     return(output)
 }
