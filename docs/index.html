@@ -35,7 +35,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">homologene</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.68.19.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.68.19.5.6</span>
       </span>
     </div>
 
@@ -205,6 +205,450 @@
 <a class="sourceLine" id="cb23-7" data-line-number="7"><span class="co">## 4  39947 4349033 LOC4349033</span></a>
 <a class="sourceLine" id="cb23-8" data-line-number="8"><span class="co">## 5  39947 9267698 LOC9267698</span></a></code></pre></div>
 </div>
+<div id="querying-diopt" class="section level1">
+<h1 class="hasAnchor">
+<a href="#querying-diopt" class="anchor"></a>Querying DIOPT</h1>
+<p>Instead of using just homologene, one can also make queries into the <a href="https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl">DIOPT database</a>. Diopt uses multiple databases to find gene homolog/orthologues. Note that this function has a <code>delay</code> parameter that is set to 10 seconds by default. This was done to obey the <code>robots.txt</code> of their website.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="kw">diopt</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'GZMH'</span>),<span class="dt">inTax =</span> <span class="dv">9606</span>, <span class="dt">outTax =</span> <span class="dv">10090</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="st">    </span>knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="co">## Submitting with 'submit'</span></a></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="4%">
+<col width="4%">
+<col width="4%">
+<col width="2%">
+<col width="4%">
+<col width="3%">
+<col width="4%">
+<col width="8%">
+<col width="4%">
+<col width="4%">
+<col width="5%">
+<col width="3%">
+<col width="4%">
+<col width="7%">
+<col width="30%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Input Order</th>
+<th align="left">Search Term</th>
+<th align="right">Human GeneID</th>
+<th align="right">HGNCID</th>
+<th align="left">Human Symbol</th>
+<th align="left">Species 2</th>
+<th align="right">Mouse GeneID</th>
+<th align="right">Mouse Species Gene ID</th>
+<th align="left">Mouse Symbol</th>
+<th align="right">DIOPT Score</th>
+<th align="right">Weighted Score</th>
+<th align="left">Rank</th>
+<th align="left">Best Score</th>
+<th align="left">Best Score Reverse</th>
+<th align="left">Prediction Derived From</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">14944</td>
+<td align="right">109253</td>
+<td align="left">Gzmg</td>
+<td align="right">8</td>
+<td align="right">8.40</td>
+<td align="left">high</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="left">Compara, HGNC, Homologene, Isobase, OrthoDB, OrthoFinder, Panther, Phylome</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">14941</td>
+<td align="right">109255</td>
+<td align="left">Gzmd</td>
+<td align="right">7</td>
+<td align="right">7.45</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+<td align="left">Compara, HGNC, Homologene, OrthoDB, OrthoFinder, Panther, Phylome</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">14943</td>
+<td align="right">109254</td>
+<td align="left">Gzmf</td>
+<td align="right">7</td>
+<td align="right">7.45</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+<td align="left">Compara, HGNC, Homologene, OrthoDB, OrthoFinder, Panther, Phylome</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">14942</td>
+<td align="right">109265</td>
+<td align="left">Gzme</td>
+<td align="right">7</td>
+<td align="right">7.45</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+<td align="left">Compara, HGNC, Homologene, OrthoDB, OrthoFinder, Panther, Phylome</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">245839</td>
+<td align="right">2675494</td>
+<td align="left">Gzmn</td>
+<td align="right">6</td>
+<td align="right">5.96</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">Yes</td>
+<td align="left">Compara, OMA, OrthoDB, OrthoFinder, Panther, Phylome</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">14940</td>
+<td align="right">109256</td>
+<td align="left">Gzmc</td>
+<td align="right">5</td>
+<td align="right">5.03</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OMA, OrthoDB, OrthoFinder, Panther, Phylome</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">14939</td>
+<td align="right">109267</td>
+<td align="left">Gzmb</td>
+<td align="right">5</td>
+<td align="right">4.94</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoFinder, orthoMCL, Panther, Phylome, RoundUp</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">17231</td>
+<td align="right">1261780</td>
+<td align="left">Mcpt8</td>
+<td align="right">4</td>
+<td align="right">4.07</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoDB, OrthoFinder, Panther, TreeFam</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">13035</td>
+<td align="right">88563</td>
+<td align="left">Ctsg</td>
+<td align="right">2</td>
+<td align="right">2.01</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoDB, OrthoFinder</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">14938</td>
+<td align="right">109266</td>
+<td align="left">Gzma</td>
+<td align="right">1</td>
+<td align="right">1.03</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">RoundUp</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">19144</td>
+<td align="right">1343166</td>
+<td align="left">Klk6</td>
+<td align="right">1</td>
+<td align="right">1.01</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoDB</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">17227</td>
+<td align="right">96940</td>
+<td align="left">Mcpt4</td>
+<td align="right">1</td>
+<td align="right">1.01</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoDB</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">545055</td>
+<td align="right">88426</td>
+<td align="left">Cma2</td>
+<td align="right">1</td>
+<td align="right">1.01</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoDB</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">17224</td>
+<td align="right">96937</td>
+<td align="left">Mcpt1</td>
+<td align="right">1</td>
+<td align="right">1.01</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoDB</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">17232</td>
+<td align="right">1194491</td>
+<td align="left">Mcpt9</td>
+<td align="right">1</td>
+<td align="right">1.01</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoDB</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">GZMH</td>
+<td align="right">2999</td>
+<td align="right">4710</td>
+<td align="left">GZMH</td>
+<td align="left">Mouse</td>
+<td align="right">17228</td>
+<td align="right">96941</td>
+<td align="left">Cma1</td>
+<td align="right">1</td>
+<td align="right">1.01</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">OrthoDB</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw">diopt</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'Eno2'</span>,<span class="st">'Mog'</span>),<span class="dt">inTax =</span> <span class="dv">10090</span>, <span class="dt">outTax =</span><span class="dv">9606</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb26-2" data-line-number="2"><span class="st">    </span>knitr<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/knitr/topics/kable">kable</a></span>()</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode R"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co">## Submitting with 'submit'</span></a></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="3%">
+<col width="3%">
+<col width="3%">
+<col width="1%">
+<col width="3%">
+<col width="2%">
+<col width="3%">
+<col width="6%">
+<col width="3%">
+<col width="3%">
+<col width="4%">
+<col width="2%">
+<col width="3%">
+<col width="5%">
+<col width="45%">
+</colgroup>
+<thead><tr class="header">
+<th align="right">Input Order</th>
+<th align="left">Search Term</th>
+<th align="right">Mouse GeneID</th>
+<th align="right">MGIID</th>
+<th align="left">Mouse Symbol</th>
+<th align="left">Species 2</th>
+<th align="right">Human GeneID</th>
+<th align="right">Human Species Gene ID</th>
+<th align="left">Human Symbol</th>
+<th align="right">DIOPT Score</th>
+<th align="right">Weighted Score</th>
+<th align="left">Rank</th>
+<th align="left">Best Score</th>
+<th align="left">Best Score Reverse</th>
+<th align="left">Prediction Derived From</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Eno2</td>
+<td align="right">13807</td>
+<td align="right">95394</td>
+<td align="left">Eno2</td>
+<td align="left">Human</td>
+<td align="right">2026</td>
+<td align="right">3353</td>
+<td align="left">ENO2</td>
+<td align="right">14</td>
+<td align="right">14.29</td>
+<td align="left">high</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="left">Compara, eggNOG, HGNC, Hieranoid, Homologene, Inparanoid, OMA, OrthoFinder, OrthoInspector, orthoMCL, Panther, Phylome, RoundUp, TreeFam</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Eno2</td>
+<td align="right">13807</td>
+<td align="right">95394</td>
+<td align="left">Eno2</td>
+<td align="left">Human</td>
+<td align="right">2023</td>
+<td align="right">3350</td>
+<td align="left">ENO1</td>
+<td align="right">4</td>
+<td align="right">3.83</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">eggNOG, OrthoFinder, orthoMCL, RoundUp</td>
+</tr>
+<tr class="odd">
+<td align="right">1</td>
+<td align="left">Eno2</td>
+<td align="right">13807</td>
+<td align="right">95394</td>
+<td align="left">Eno2</td>
+<td align="left">Human</td>
+<td align="right">2027</td>
+<td align="right">3354</td>
+<td align="left">ENO3</td>
+<td align="right">4</td>
+<td align="right">3.83</td>
+<td align="left">moderate</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">eggNOG, OrthoFinder, orthoMCL, RoundUp</td>
+</tr>
+<tr class="even">
+<td align="right">1</td>
+<td align="left">Eno2</td>
+<td align="right">13807</td>
+<td align="right">95394</td>
+<td align="left">Eno2</td>
+<td align="left">Human</td>
+<td align="right">387712</td>
+<td align="right">31670</td>
+<td align="left">ENO4</td>
+<td align="right">1</td>
+<td align="right">0.90</td>
+<td align="left">low</td>
+<td align="left">No</td>
+<td align="left">No</td>
+<td align="left">eggNOG</td>
+</tr>
+<tr class="odd">
+<td align="right">2</td>
+<td align="left">Mog</td>
+<td align="right">17441</td>
+<td align="right">97435</td>
+<td align="left">Mog</td>
+<td align="left">Human</td>
+<td align="right">4340</td>
+<td align="right">7197</td>
+<td align="left">MOG</td>
+<td align="right">13</td>
+<td align="right">13.28</td>
+<td align="left">high</td>
+<td align="left">Yes</td>
+<td align="left">Yes</td>
+<td align="left">Compara, eggNOG, HGNC, Hieranoid, Homologene, Inparanoid, OrthoFinder, OrthoInspector, orthoMCL, Panther, Phylome, RoundUp, TreeFam</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="mishaps" class="section level1">
 <h1 class="hasAnchor">
 <a href="#mishaps" class="anchor"></a>Mishaps</h1>
@@ -247,7 +691,7 @@
 <li><a href="https://travis-ci.org/oganm/homologene"><img src="https://travis-ci.org/oganm/homologene.svg?branch=master" alt="Build Status"></a></li>
 <li><a href="https://codecov.io/gh/oganm/homologene"><img src="https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg" alt="codecov"></a></li>
 <li><a href="https://cran.r-project.org/package=homologene"><img src="https://www.r-pkg.org/badges/version/homologene?color=#32BD36"></a></li>
-<li><a href="https://github.com/oganm/homologene"><img src="https://img.shields.io/badge/devel%20version-1.5.68.19.5.1-blue.svg"></a></li>
+<li><a href="https://github.com/oganm/homologene"><img src="https://img.shields.io/badge/devel%20version-1.5.68.19.5.6-blue.svg"></a></li>
 </ul>
 </div>
 </div>

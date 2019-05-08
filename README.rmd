@@ -112,6 +112,23 @@ gene_info %>%
 
 ```
 
+Querying DIOPT
+==============
+
+Instead of using just homologene, one can also make queries into the [DIOPT database](https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl). Diopt uses multiple databases
+to find gene homolog/orthologues. Note that this function has a `delay` parameter
+that is set to 10 seconds by default. This was done to obey the `robots.txt` of their website.
+
+```{r, cache = TRUE}
+
+diopt(c('GZMH'),inTax = 9606, outTax = 10090) %>% 
+    knitr::kable()
+
+diopt(c('Eno2','Mog'),inTax = 10090, outTax =9606) %>%
+    knitr::kable()
+
+```
+
 
 Mishaps
 =================
