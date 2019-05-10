@@ -40,14 +40,3 @@ test_that('homologene2',{
     expect_true(nrow(genes)==0)
 
 })
-
-
-
-
-test_that('Detached behaviour',{
-    detach("package:homologene", unload=TRUE)
-    expect_equal(homologene::mouse2human(c('Eno2','Mog'))$humanGene,c('ENO2','MOG'))
-    expect_equal(dim(homologene::human2mouse(c('lolwut'))), c(0,4))
-})
-
-
