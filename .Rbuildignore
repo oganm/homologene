@@ -9,3 +9,4 @@
 README.rmd
 ^docs$
 ^README_cache$
+^cache
