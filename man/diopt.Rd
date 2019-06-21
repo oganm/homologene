@@ -11,7 +11,7 @@ diopt(genes, inTax, outTax, delay = 10)
 
 \item{inTax}{taxid of the species that the input genes are coming from}
 
-\item{outTax}{taxid of the species that you are seeking homology}
+\item{outTax}{taxid of the species that you are seeking homology. 0 to query all species.}
 
 \item{delay}{How many seconds of delay should be between queries. Default is 10
 based on the robots.txt at the time this function is written.}
@@ -26,4 +26,21 @@ API so this function queries by visiting the site and filling up the form. By de
 each query will take a minimum of 10 seconds due to \code{delay} parameter. This
 is taken from their robots.txt at the time this function is written.
 Note that DIOPT is not necesariy in sync with homologene database as provided in this package.
+}
+\details{
+DIOPT does not support all species available in the homologene database. The supported
+species are:
+
+\describe{
+    \item{4896}{Schizosaccharomyces pombe}
+    \item{4932}{Saccharomyces cerevisiae}
+    \item{6239}{Caenorhabditis elegans}
+    \item{7227}{Drosophila melanogaster}
+    \item{7955}{Danio rerio}
+    \item{8364}{Xenopus (Silurana) tropicalis}
+    \item{9606}{Homo sapiens}
+    \item{10090}{Mus musculus}
+    \item{10116}{Rattus norvegicus}
+    \item{3702}{Arabidopsis thaliana}
+}
 }
