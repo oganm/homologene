@@ -2,5 +2,5 @@
 #'
 #' A modified copy of the homologene database. Homologene was updated at 2014 and many of its gene IDs and
 #' symbols are out of date. Here the IDs and symbols are replaced with their most current version
-#' Last update: Sun Jul 14 06:45:33 2019
+#' Last update: Sun Jul 21 06:45:51 2019
 "homologeneData2"
