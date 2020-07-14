@@ -173,7 +173,7 @@ getHomologene = function(destfile = NULL, justRead = FALSE){
                              destfile)
     }
     
-    homologene = readr::read_tsv('data-raw/homologene.data',
+    homologene = readr::read_tsv(destfile,
                                  col_names = c('HID','Taxonomy','Gene.ID','Gene.Symbol','Protein.GI','Protein.Accession'),
                                  col_types = 'iiicic')
     
