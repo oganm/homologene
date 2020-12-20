@@ -11,6 +11,6 @@ homologeneData2
 \description{
 A modified copy of the homologene database. Homologene was updated at 2014 and many of its gene IDs and
 symbols are out of date. Here the IDs and symbols are replaced with their most current version
-Last update: Sun Dec 13 06:52:38 2020
+Last update: Sun Dec 20 06:48:38 2020
 }
 \keyword{datasets}
