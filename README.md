@@ -2,7 +2,7 @@
 homologene
 ==========
 
-[![Build Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene) [![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene) [![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene) [![](https://img.shields.io/badge/devel%20version-1.5.68.21.1.3-blue.svg)](https://github.com/oganm/homologene)
+[![Build Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene) [![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene) [![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene) [![](https://img.shields.io/badge/devel%20version-1.5.68.21.1.10-blue.svg)](https://github.com/oganm/homologene)
 
 An r package that works as a wrapper to homologene
 
