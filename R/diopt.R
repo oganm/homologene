@@ -80,10 +80,10 @@ diopt = function(genes, inTax, outTax, delay = 10){
     
     response = rvest::html_form_submit(form,submit = 'submit')
     
-    writeLines(ogbox::as.char(session$response),'hede.html')
-    utils::browseURL('hede.html')
-    writeBin(response$content,'hede.html')
-    utils::browseURL('hede.html')
+    # writeLines(ogbox::as.char(session$response),'hede.html')
+    # utils::browseURL('hede.html')
+    # writeBin(response$content,'hede.html')
+    # utils::browseURL('hede.html')
     
     output = response %>% 
         xml2::read_html() %>% 
