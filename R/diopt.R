@@ -38,7 +38,8 @@
 diopt = function(genes, inTax, outTax, delay = 10){
     # rtxt = robotstxt::robotstxt(domain = "flyrnai.org")
     # delay = rtxt$crawl_delay %>% filter(useragent =='*') %$% value %>% as.integer()
-    session = rvest::html_session('https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl')
+    session = rvest::session('https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl')
+    # session = rvest::html_session('https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl', httr::config(ssl_verifypeer = 0L))
     form = rvest::html_form(session)[[1]]
     
     acceptableInTax= form$fields$input_species$options
@@ -47,26 +48,45 @@ diopt = function(genes, inTax, outTax, delay = 10){
     assertthat::assert_that(inTax %in% acceptableInTax)
     assertthat::assert_that(outTax %in% acceptableOutTax)
     
-    form = rvest::set_values(form,
+    form = rvest::html_form_set(form,
                              input_species = inTax,
                              output_species = outTax,
                              gene_list = paste(genes,collapse = '\n\r'))
     
-    additional_filters = which(names(form$fields) == 'additional_filter')
+    # additional_filters = which(names(form$fields) == 'additional_filter')
     
-    additional_filter_names = form$fields[additional_filters] %>% purrr::map_chr('value')
+    # additional_filter_names = form$fields[additional_filters] %>% purrr::map_chr('value')
     
-    form$fields[additional_filters][additional_filter_names %in% 'None'][[1]]$checked = 'checked'
-    form$fields[additional_filters][additional_filter_names %in% 'NoLow'][[1]]$checked = NULL
+    # form$fields[additional_filters][additional_filter_names %in% 'None'][[1]]$attr$checked = 'checked'
+    # form$fields[additional_filters][additional_filter_names %in% 'NoLow'][[1]]$attr$checked = NULL
+    
+    values = form$fields %>% purrr::map('value')
+    additional_filters = names(values) == 'additional_filter'
+    noneField = values %>% purrr::map_lgl(function(x){length(x)==1&&x !='None'}) 
+    form$fields = form$fields[!(additional_filters & noneField)]
+    
+
+    values = form$fields %>% purrr::map('value')
+    search_datasets = names(values) == 'search_datasets'
+    allField = values %>% purrr::map_lgl(function(x){length(x)==1&&x !='All'}) 
+    form$fields = form$fields[!(search_datasets & allField)]
+    
+    values = form$fields %>% purrr::map('value')
+    search_datasets = names(values) == 'search_fields'
+    allField = values %>% purrr::map_lgl(function(x){length(x)==1&&x !='***'}) 
+    form$fields = form$fields[!(search_datasets & allField)]
     
     Sys.sleep(delay)
     
-    response = rvest::submit_form(session,form)
+    response = rvest::html_form_submit(form,submit = 'submit')
     
-    # writeLines(as.char(response$response),'hede.html')
-    # utils::browseURL('hede.html')
+    writeLines(ogbox::as.char(session$response),'hede.html')
+    utils::browseURL('hede.html')
+    writeBin(response$content,'hede.html')
+    utils::browseURL('hede.html')
     
     output = response %>% 
+        xml2::read_html() %>% 
         rvest::html_node('#results') %>% 
         rvest::html_table() %>% 
         dplyr::select(-`Gene2FunctionDetails`,-`Feedback`,-`Alignment & Scores`)
