@@ -2,7 +2,7 @@
 homologene
 ==========
 
-[![Build Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene) [![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene) [![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene) [![](https://img.shields.io/badge/devel%20version-1.5.68.21.4.5-blue.svg)](https://github.com/oganm/homologene)
+[![Build Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene) [![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene) [![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene) [![](https://img.shields.io/badge/devel%20version-1.5.68.21.4.11-blue.svg)](https://github.com/oganm/homologene)
 
 An r package that works as a wrapper to homologene
 
@@ -116,11 +116,8 @@ mouse2human(c('Mesd',
             db = homologeneData2)
 ```
 
-    ##   mouseGene humanGene mouseID humanID
-    ## 1      Mesd      MESD   67943   23184
-    ## 2  Trp53rka    TP53RK  381406  112858
-    ## 3    Cstdc4      CSTA  433016    1475
-    ## 4    Ifit3b     IFIT3  667370    3437
+    ## [1] mouseGene humanGene mouseID   humanID  
+    ## <0 rows> (or 0-length row.names)
 
 The `homologeneData2` object that comes with the GitHub version of this package is updated weekly but if you are using the CRAN version and want the latest annotations, or if you want to keep a frozen version homologene, you can use the `updateHomologene` function.
 
