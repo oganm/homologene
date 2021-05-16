@@ -1,7 +1,7 @@
 Package: homologene
 Type: Package
 Title: Quick Access to Homologene and Gene Annotation Updates
-Version: 1.5.68.21.5.9
+Version: 1.5.68.21.5.16
 Depends: R (>= 3.1.2)
 Imports:
     dplyr (>= 0.7.4),
@@ -14,7 +14,7 @@ Imports:
     xml2 (>= 1.3.2)
 Suggests:
     testthat (>= 1.0.2)
-Date: 2021-05-09
+Date: 2021-05-16
 Authors@R: c(
     person("Ogan", "Mancarci", email = "ogan.mancarci@gmail.com", role = c("aut", "cre")),
     person("Leon","French", role = c('ctb')))
