@@ -5,7 +5,7 @@
 Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene)
 [![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene)
 [![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene)
-[![](https://img.shields.io/badge/devel%20version-1.5.68.21.5.23-blue.svg)](https://github.com/oganm/homologene)
+[![](https://img.shields.io/badge/devel%20version-1.5.68.21.9.7-blue.svg)](https://github.com/oganm/homologene)
 
 An r package that works as a wrapper to homologene
 
@@ -135,8 +135,7 @@ mouse2human(c('Mesd',
 The `homologeneData2` object that comes with the GitHub version of this
 package is updated weekly but if you are using the CRAN version and want
 the latest annotations, or if you want to keep a frozen version
-homologene, you can use the `updateHomologene`
-function.
+homologene, you can use the `updateHomologene` function.
 
 ``` r
 homologeneDataVeryNew = updateHomologene() # update the homologene database with the latest identifiers
@@ -215,7 +214,7 @@ diopt(c('GZMH'),inTax = 9606, outTax = 10090) %>%
     ## Submitting with 'submit'
 
 | Input Order | Search Term | Human GeneID | HGNCID | Human Symbol | Species 2 | Mouse GeneID | Mouse Species Gene ID | Mouse Symbol | DIOPT Score | Weighted Score | Rank     | Best Score | Best Score Reverse | Prediction Derived From                                                    |
-| ----------: | :---------- | -----------: | -----: | :----------- | :-------- | -----------: | --------------------: | :----------- | ----------: | -------------: | :------- | :--------- | :----------------- | :------------------------------------------------------------------------- |
+|------------:|:------------|-------------:|-------:|:-------------|:----------|-------------:|----------------------:|:-------------|------------:|---------------:|:---------|:-----------|:-------------------|:---------------------------------------------------------------------------|
 |           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14944 |                109253 | Gzmg         |           8 |           8.40 | high     | Yes        | Yes                | Compara, HGNC, Homologene, Isobase, OrthoDB, OrthoFinder, Panther, Phylome |
 |           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14941 |                109255 | Gzmd         |           7 |           7.45 | moderate | No         | Yes                | Compara, HGNC, Homologene, OrthoDB, OrthoFinder, Panther, Phylome          |
 |           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14943 |                109254 | Gzmf         |           7 |           7.45 | moderate | No         | Yes                | Compara, HGNC, Homologene, OrthoDB, OrthoFinder, Panther, Phylome          |
@@ -241,7 +240,7 @@ diopt(c('Eno2','Mog'),inTax = 10090, outTax =9606) %>%
     ## Submitting with 'submit'
 
 | Input Order | Search Term | Mouse GeneID | MGIID | Mouse Symbol | Species 2 | Human GeneID | Human Species Gene ID | Human Symbol | DIOPT Score | Weighted Score | Rank     | Best Score | Best Score Reverse | Prediction Derived From                                                                                                                  |
-| ----------: | :---------- | -----------: | ----: | :----------- | :-------- | -----------: | --------------------: | :----------- | ----------: | -------------: | :------- | :--------- | :----------------- | :--------------------------------------------------------------------------------------------------------------------------------------- |
+|------------:|:------------|-------------:|------:|:-------------|:----------|-------------:|----------------------:|:-------------|------------:|---------------:|:---------|:-----------|:-------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|
 |           1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2026 |                  3353 | ENO2         |          14 |          14.29 | high     | Yes        | Yes                | Compara, eggNOG, HGNC, Hieranoid, Homologene, Inparanoid, OMA, OrthoFinder, OrthoInspector, orthoMCL, Panther, Phylome, RoundUp, TreeFam |
 |           1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2023 |                  3350 | ENO1         |           4 |           3.83 | moderate | No         | No                 | eggNOG, OrthoFinder, orthoMCL, RoundUp                                                                                                   |
 |           1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2027 |                  3354 | ENO3         |           4 |           3.83 | moderate | No         | No                 | eggNOG, OrthoFinder, orthoMCL, RoundUp                                                                                                   |
