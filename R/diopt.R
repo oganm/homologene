@@ -71,10 +71,10 @@ diopt = function(genes, inTax, outTax, delay = 10){
     allField = values %>% purrr::map_lgl(function(x){length(x)==1&&x !='All'}) 
     form$fields = form$fields[!(search_datasets & allField)]
     
-    values = form$fields %>% purrr::map('value')
-    search_datasets = names(values) == 'search_fields'
-    allField = values %>% purrr::map_lgl(function(x){length(x)==1&&x !='***'}) 
-    form$fields = form$fields[!(search_datasets & allField)]
+    # values = form$fields %>% purrr::map('value')
+    # search_datasets = names(values) == 'search_fields'
+    # allField = values %>% purrr::map_lgl(function(x){length(x)==1&&x !='***'}) 
+    # form$fields = form$fields[!(search_datasets & allField)]
     
     Sys.sleep(delay)
     
@@ -87,8 +87,7 @@ diopt = function(genes, inTax, outTax, delay = 10){
     
     output = response %>% 
         xml2::read_html() %>% 
-        rvest::html_node('#results') %>% 
-        rvest::html_table() %>% 
-        dplyr::select(-`Gene2FunctionDetails`,-`Feedback`,-`Alignment & Scores`)
+        rvest::html_node('#results-table') %>% 
+        rvest::html_table()
     return(output)
 }
