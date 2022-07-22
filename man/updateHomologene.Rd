@@ -4,9 +4,12 @@
 \alias{updateHomologene}
 \title{Update homologene database}
 \usage{
-updateHomologene(destfile = NULL,
-  baseline = homologene::homologeneData2, gene_history = NULL,
-  gene_info = NULL)
+updateHomologene(
+  destfile = NULL,
+  baseline = homologene::homologeneData2,
+  gene_history = NULL,
+  gene_info = NULL
+)
 }
 \arguments{
 \item{destfile}{Optional. Path of the output file.}

@@ -5,7 +5,7 @@
 Status](https://travis-ci.org/oganm/homologene.svg?branch=master)](https://travis-ci.org/oganm/homologene)
 [![codecov](https://codecov.io/gh/oganm/homologene/branch/master/graph/badge.svg)](https://codecov.io/gh/oganm/homologene)
 [![](https://www.r-pkg.org/badges/version/homologene?color=#32BD36)](https://cran.r-project.org/package=homologene)
-[![](https://img.shields.io/badge/devel%20version-1.5.68.21.9.7-blue.svg)](https://github.com/oganm/homologene)
+[![](https://img.shields.io/badge/devel%20version-1.6.68.22.7.21-blue.svg)](https://github.com/oganm/homologene)
 
 An r package that works as a wrapper to homologene
 
@@ -154,31 +154,15 @@ The package also includes functions that were used to create the
 
 ``` r
 library(dplyr)
-```
 
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following object is masked from 'package:testthat':
-    ## 
-    ##     matches
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
-``` r
 gene_history = getGeneHistory()
 oldIds = c(4340964, 4349034, 4332470, 4334151, 4323831)
 newIds = updateIDs(oldIds,gene_history)
 print(newIds)
 ```
 
-    ## [1] "9267698" "4349033" "4332468" "4334150" "4324017"
+    ## [1] "9267698" "4349033" "4332468" "4334150"
+    ## [5] "4324017"
 
 ``` r
 # get the latest gene symbols for the ids
@@ -189,11 +173,11 @@ gene_info %>%
     dplyr::filter(GeneID %in% as.integer(newIds)) # faster to match integers
 ```
 
-    ## # A tibble: 5 x 3
+    ## # A tibble: 5 × 3
     ##   tax_id  GeneID Symbol    
     ##    <int>   <int> <chr>     
     ## 1  39947 4324017 LOC4324017
-    ## 2  39947 4332468 LOC4332468
+    ## 2  39947 4332468 SPO11-3   
     ## 3  39947 4334150 LOC4334150
     ## 4  39947 4349033 LOC4349033
     ## 5  39947 9267698 LOC9267698
@@ -211,41 +195,45 @@ diopt(c('GZMH'),inTax = 9606, outTax = 10090) %>%
     knitr::kable()
 ```
 
-    ## Submitting with 'submit'
-
-| Input Order | Search Term | Human GeneID | HGNCID | Human Symbol | Species 2 | Mouse GeneID | Mouse Species Gene ID | Mouse Symbol | DIOPT Score | Weighted Score | Rank     | Best Score | Best Score Reverse | Prediction Derived From                                                    |
-|------------:|:------------|-------------:|-------:|:-------------|:----------|-------------:|----------------------:|:-------------|------------:|---------------:|:---------|:-----------|:-------------------|:---------------------------------------------------------------------------|
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14944 |                109253 | Gzmg         |           8 |           8.40 | high     | Yes        | Yes                | Compara, HGNC, Homologene, Isobase, OrthoDB, OrthoFinder, Panther, Phylome |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14941 |                109255 | Gzmd         |           7 |           7.45 | moderate | No         | Yes                | Compara, HGNC, Homologene, OrthoDB, OrthoFinder, Panther, Phylome          |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14943 |                109254 | Gzmf         |           7 |           7.45 | moderate | No         | Yes                | Compara, HGNC, Homologene, OrthoDB, OrthoFinder, Panther, Phylome          |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14942 |                109265 | Gzme         |           7 |           7.45 | moderate | No         | Yes                | Compara, HGNC, Homologene, OrthoDB, OrthoFinder, Panther, Phylome          |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |       245839 |               2675494 | Gzmn         |           6 |           5.96 | moderate | No         | Yes                | Compara, OMA, OrthoDB, OrthoFinder, Panther, Phylome                       |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14940 |                109256 | Gzmc         |           5 |           5.03 | moderate | No         | No                 | OMA, OrthoDB, OrthoFinder, Panther, Phylome                                |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14939 |                109267 | Gzmb         |           5 |           4.94 | moderate | No         | No                 | OrthoFinder, orthoMCL, Panther, Phylome, RoundUp                           |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17231 |               1261780 | Mcpt8        |           4 |           4.07 | moderate | No         | No                 | OrthoDB, OrthoFinder, Panther, TreeFam                                     |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        13035 |                 88563 | Ctsg         |           2 |           2.01 | low      | No         | No                 | OrthoDB, OrthoFinder                                                       |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14938 |                109266 | Gzma         |           1 |           1.03 | low      | No         | No                 | RoundUp                                                                    |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        19144 |               1343166 | Klk6         |           1 |           1.01 | low      | No         | No                 | OrthoDB                                                                    |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17227 |                 96940 | Mcpt4        |           1 |           1.01 | low      | No         | No                 | OrthoDB                                                                    |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |       545055 |                 88426 | Cma2         |           1 |           1.01 | low      | No         | No                 | OrthoDB                                                                    |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17224 |                 96937 | Mcpt1        |           1 |           1.01 | low      | No         | No                 | OrthoDB                                                                    |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17232 |               1194491 | Mcpt9        |           1 |           1.01 | low      | No         | No                 | OrthoDB                                                                    |
-|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17228 |                 96941 | Cma1         |           1 |           1.01 | low      | No         | No                 | OrthoDB                                                                    |
+| Input Order | Search Term | Human GeneID | HGNCID | Human Symbol | Species 2 | Mouse GeneID | Mouse Species Gene ID | Mouse Symbol | Ensmbl ID (link HPA) | DIOPT Score | Weighted Score | Rank     | Best Score | Best Score Reverse | Prediction Derived From                                | Alignment & Scores | Feedback | Gene Details                             |
+|------------:|:------------|-------------:|-------:|:-------------|:----------|-------------:|----------------------:|:-------------|:---------------------|------------:|---------------:|:---------|:-----------|:-------------------|:-------------------------------------------------------|:-------------------|:---------|:-----------------------------------------|
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14944 |                109253 | Gzmg         | NA                   |           6 |           5.87 | high     | Yes        | Yes                | eggNOG, Homologene, Isobase, OrthoDB, Panther, Phylome | NA                 | Add      | G2F details (Gzmg) DRscDB Data: (Gzmg)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14939 |                109267 | Gzmb         | NA                   |           6 |           5.85 | moderate | Yes        | No                 | eggNOG, OrthoDB, orthoMCL, Panther, Phylome, RoundUp   | NA                 | Add      | G2F details (Gzmb) DRscDB Data: (Gzmb)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |       245839 |               2675494 | Gzmn         | NA                   |           5 |           4.93 | moderate | No         | No                 | eggNOG, OMA, OrthoDB, Panther, Phylome                 | NA                 | Add      | G2F details (Gzmn) DRscDB Data: (Gzmn)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14940 |                109256 | Gzmc         | NA                   |           5 |           4.93 | moderate | No         | No                 | eggNOG, OMA, OrthoDB, Panther, Phylome                 | NA                 | Add      | G2F details (Gzmc) DRscDB Data: (Gzmc)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14941 |                109255 | Gzmd         | NA                   |           5 |           4.92 | moderate | No         | No                 | eggNOG, Homologene, OrthoDB, Panther, Phylome          | NA                 | Add      | G2F details (Gzmd) DRscDB Data: (Gzmd)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14943 |                109254 | Gzmf         | NA                   |           5 |           4.92 | moderate | No         | No                 | eggNOG, Homologene, OrthoDB, Panther, Phylome          | NA                 | Add      | G2F details (Gzmf) DRscDB Data: (Gzmf)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14942 |                109265 | Gzme         | NA                   |           5 |           4.92 | moderate | No         | No                 | eggNOG, Homologene, OrthoDB, Panther, Phylome          | NA                 | Add      | G2F details (Gzme) DRscDB Data: (Gzme)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17231 |               1261780 | Mcpt8        | NA                   |           4 |           3.97 | moderate | No         | No                 | eggNOG, OrthoDB, Panther, TreeFam                      | NA                 | Add      | G2F details (Mcpt8) DRscDB Data: (Mcpt8) |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        13035 |                 88563 | Ctsg         | NA                   |           2 |           1.91 | low      | No         | No                 | eggNOG, OrthoDB                                        | NA                 | Add      | G2F details (Ctsg) DRscDB Data: (Ctsg)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17228 |                 96941 | Cma1         | NA                   |           2 |           1.91 | low      | No         | No                 | eggNOG, OrthoDB                                        | NA                 | Add      | G2F details (Cma1) DRscDB Data: (Cma1)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        14938 |                109266 | Gzma         | NA                   |           1 |           1.03 | low      | No         | No                 | RoundUp                                                | NA                 | Add      | G2F details (Gzma) DRscDB Data: (Gzma)   |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17232 |               1194491 | Mcpt9        | NA                   |           1 |           1.01 | low      | No         | Yes                | OrthoDB                                                | NA                 | Add      | G2F details (Mcpt9) DRscDB Data: (Mcpt9) |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17225 |                 96938 | Mcpt2        | NA                   |           1 |           1.01 | low      | No         | Yes                | OrthoDB                                                | NA                 | Add      | G2F details (Mcpt2) DRscDB Data: (Mcpt2) |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |        17224 |                 96937 | Mcpt1        | NA                   |           1 |           1.01 | low      | No         | Yes                | OrthoDB                                                | NA                 | Add      | G2F details (Mcpt1) DRscDB Data: (Mcpt1) |
+|           1 | GZMH        |         2999 |   4710 | GZMH         | Mouse     |       545055 |                 88426 | Cma2         | NA                   |           1 |           1.01 | low      | No         | Yes                | OrthoDB                                                | NA                 | Add      | G2F details (Cma2) DRscDB Data: (Cma2)   |
 
 ``` r
 diopt(c('Eno2','Mog'),inTax = 10090, outTax =9606) %>%
     knitr::kable()
 ```
 
-    ## Submitting with 'submit'
-
-| Input Order | Search Term | Mouse GeneID | MGIID | Mouse Symbol | Species 2 | Human GeneID | Human Species Gene ID | Human Symbol | DIOPT Score | Weighted Score | Rank     | Best Score | Best Score Reverse | Prediction Derived From                                                                                                                  |
-|------------:|:------------|-------------:|------:|:-------------|:----------|-------------:|----------------------:|:-------------|------------:|---------------:|:---------|:-----------|:-------------------|:-----------------------------------------------------------------------------------------------------------------------------------------|
-|           1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2026 |                  3353 | ENO2         |          14 |          14.29 | high     | Yes        | Yes                | Compara, eggNOG, HGNC, Hieranoid, Homologene, Inparanoid, OMA, OrthoFinder, OrthoInspector, orthoMCL, Panther, Phylome, RoundUp, TreeFam |
-|           1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2023 |                  3350 | ENO1         |           4 |           3.83 | moderate | No         | No                 | eggNOG, OrthoFinder, orthoMCL, RoundUp                                                                                                   |
-|           1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2027 |                  3354 | ENO3         |           4 |           3.83 | moderate | No         | No                 | eggNOG, OrthoFinder, orthoMCL, RoundUp                                                                                                   |
-|           1 | Eno2        |        13807 | 95394 | Eno2         | Human     |       387712 |                 31670 | ENO4         |           1 |           0.90 | low      | No         | No                 | eggNOG                                                                                                                                   |
-|           2 | Mog         |        17441 | 97435 | Mog          | Human     |         4340 |                  7197 | MOG          |          13 |          13.28 | high     | Yes        | Yes                | Compara, eggNOG, HGNC, Hieranoid, Homologene, Inparanoid, OrthoFinder, OrthoInspector, orthoMCL, Panther, Phylome, RoundUp, TreeFam      |
+|               Input Order | Search Term | Mouse GeneID | MGIID | Mouse Symbol | Species 2 | Human GeneID | Human Species Gene ID | Human Symbol | Ensmbl ID (link HPA) | DIOPT Score | Weighted Score | Rank     | Best Score | Best Score Reverse | Prediction Derived From                                                                                                                           | Alignment & Scores | Feedback | Gene Details                           |
+|--------------------------:|:------------|-------------:|------:|:-------------|:----------|-------------:|----------------------:|:-------------|:---------------------|------------:|---------------:|:---------|:-----------|:-------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------|:-------------------|:---------|:---------------------------------------|
+|                         1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2026 |                  3353 | ENO2         | ENSG00000111674      |          14 |          14.29 | high     | Yes        | Yes                | Compara, eggNOG, HGNC, Hieranoid, Homologene, Inparanoid, OMA, OrthoFinder, OrthoInspector, orthoMCL, Panther, Phylome, RoundUp, TreeFam          | NA                 | Add      | G2F details (ENO2) DRscDB Data: (ENO2) |
+| Human Protein Atlas (HPA) |             |              |       |              |           |              |                       |              |                      |             |                |          |            |                    |                                                                                                                                                   |                    |          |                                        |
+|                         1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2023 |                  3350 | ENO1         | ENSG00000074800      |           5 |           4.84 | moderate | No         | No                 | eggNOG, OrthoDB, OrthoFinder, orthoMCL, RoundUp                                                                                                   | NA                 | Add      | G2F details (ENO1) DRscDB Data: (ENO1) |
+| Human Protein Atlas (HPA) |             |              |       |              |           |              |                       |              |                      |             |                |          |            |                    |                                                                                                                                                   |                    |          |                                        |
+|                         1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2027 |                  3354 | ENO3         | ENSG00000108515      |           4 |           3.83 | moderate | No         | No                 | eggNOG, OrthoFinder, orthoMCL, RoundUp                                                                                                            | NA                 | Add      | G2F details (ENO3) DRscDB Data: (ENO3) |
+| Human Protein Atlas (HPA) |             |              |       |              |           |              |                       |              |                      |             |                |          |            |                    |                                                                                                                                                   |                    |          |                                        |
+|                         1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2580 |                  4113 | GAK          | ENSG00000178950      |           1 |           1.01 | low      | No         | No                 | OrthoDB                                                                                                                                           | NA                 | Add      | G2F details (GAK) DRscDB Data: (GAK)   |
+| Human Protein Atlas (HPA) |             |              |       |              |           |              |                       |              |                      |             |                |          |            |                    |                                                                                                                                                   |                    |          |                                        |
+|                         1 | Eno2        |        13807 | 95394 | Eno2         | Human     |         2534 |                  4037 | FYN          | ENSG00000010810      |           1 |           1.01 | low      | No         | No                 | OrthoDB                                                                                                                                           | NA                 | Add      | G2F details (FYN) DRscDB Data: (FYN)   |
+| Human Protein Atlas (HPA) |             |              |       |              |           |              |                       |              |                      |             |                |          |            |                    |                                                                                                                                                   |                    |          |                                        |
+|                         1 | Eno2        |        13807 | 95394 | Eno2         | Human     |       387712 |                 31670 | ENO4         | ENSG00000188316      |           1 |           0.90 | low      | No         | No                 | eggNOG                                                                                                                                            | NA                 | Add      | G2F details (ENO4) DRscDB Data: (ENO4) |
+| Human Protein Atlas (HPA) |             |              |       |              |           |              |                       |              |                      |             |                |          |            |                    |                                                                                                                                                   |                    |          |                                        |
+|                         2 | Mog         |        17441 | 97435 | Mog          | Human     |         4340 |                  7197 | MOG          | ENSG00000204655      |          15 |          15.30 | high     | Yes        | Yes                | Compara, eggNOG, HGNC, Hieranoid, Homologene, Inparanoid, OMA, OrthoDB, OrthoFinder, OrthoInspector, orthoMCL, Panther, Phylome, RoundUp, TreeFam | NA                 | Add      | G2F details (MOG) DRscDB Data: (MOG)   |
+| Human Protein Atlas (HPA) |             |              |       |              |           |              |                       |              |                      |             |                |          |            |                    |                                                                                                                                                   |                    |          |                                        |
 
 # Mishaps
 

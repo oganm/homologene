@@ -4,7 +4,9 @@
 \name{homologeneVersion}
 \alias{homologeneVersion}
 \title{Version of homologene used}
-\format{An object of class \code{integer} of length 1.}
+\format{
+An object of class \code{integer} of length 1.
+}
 \usage{
 homologeneVersion
 }

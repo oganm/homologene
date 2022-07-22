@@ -4,9 +4,14 @@
 \alias{autoTranslate}
 \title{Attempt to automatically translate a gene list}
 \usage{
-autoTranslate(genes, targetGenes, possibleOrigins = NULL,
-  possibleTargets = NULL, returnAllPossible = FALSE,
-  db = homologene::homologeneData)
+autoTranslate(
+  genes,
+  targetGenes,
+  possibleOrigins = NULL,
+  possibleTargets = NULL,
+  returnAllPossible = FALSE,
+  db = homologene::homologeneData
+)
 }
 \arguments{
 \item{genes}{A list of genes to match the target. Symbols or NCBI ids}
