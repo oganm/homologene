@@ -48,6 +48,7 @@ Sys.sleep(1)
 add(repo,'man/homologeneData2.Rd')
 Sys.sleep(1)
 add(repo,'data-raw/homologene2.tsv')
+add(repo,'man')
 Sys.sleep(1)
 
 version = getVersion()
@@ -75,4 +76,4 @@ token = readLines('data-raw/auth')
 Sys.setenv(GITHUB_PAT = token)
 cred = git2r::cred_token()
 git2r::push(repo,credentials = cred)
-
+    
