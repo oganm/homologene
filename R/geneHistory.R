@@ -19,7 +19,7 @@ getGeneInfo = function(destfile = NULL, justRead = FALSE,chunk_size = 1000000){
         destfile = tempfile()
     }
     if(!(!is.null(destfile) && file.exists(destfile) && justRead)){
-        utils::download.file('ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz',
+        utils::download.file('https://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_info.gz',
                              paste0(destfile,'.gz'))
         
         R.utils::gunzip(paste0(destfile,'.gz'), overwrite = TRUE)
