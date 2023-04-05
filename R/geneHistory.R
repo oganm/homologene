@@ -169,7 +169,7 @@ getHomologene = function(destfile = NULL, justRead = FALSE){
         destfile = tempfile()
     }
     if(!(!is.null(destfile) && file.exists(destfile) && justRead)){
-        utils::download.file('ftp://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data',
+        utils::download.file('https://ftp.ncbi.nih.gov/pub/HomoloGene/current/homologene.data',
                              destfile)
     }
     
