@@ -55,7 +55,7 @@ getGeneHistory = function(destfile = NULL, justRead = FALSE){
     }
     
     if(!(!is.null(destfile) && file.exists(destfile) && justRead)){
-        utils::download.file(url = "ftp://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_history.gz", 
+        utils::download.file(url = "https://ftp.ncbi.nlm.nih.gov/gene/DATA/gene_history.gz", 
                              destfile = paste0(destfile,'.gz'))
         
         
