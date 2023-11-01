@@ -1,7 +1,7 @@
 Package: homologene
 Type: Package
 Title: Quick Access to Homologene and Gene Annotation Updates
-Version: 1.7.68.23.5.2
+Version: 1.7.68.23.10.31
 Depends: R (>= 3.1.2)
 Imports:
     dplyr (>= 0.7.4),
@@ -14,7 +14,7 @@ Imports:
     xml2 (>= 1.3.2)
 Suggests:
     testthat (>= 1.0.2)
-Date: 2023-05-02
+Date: 2023-10-31
 Authors@R: c(
     person("Ogan", "Mancarci", email = "ogan.mancarci@gmail.com", role = c("aut", "cre")),
     person("Leon","French", role = c('ctb')))
@@ -28,4 +28,4 @@ Description: A wrapper for the homologene database by the National Center for
     submission) version and functions to fetch latest annotation data to keep updated.
 License: MIT + file LICENSE
 LazyData: true
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
