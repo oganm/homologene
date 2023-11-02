@@ -28,25 +28,37 @@
 #'
 #' @param genes  A vector of gene identifiers. Anything that DIOPT accepts
 #' @param inTax taxid of the species that the input genes are coming from
-#' @param outTax taxid of the species that you are seeking homology. 0 to query all species.
+#' @param outTax taxid of the species that you are seeking homology. 0 to query 
+#' all species. It must be specificed unless paralogue = TRUE
+#' @param paralogue If TRUE, searches for paralogues instead of orthologues. 
+#' outTax cannot be specified when searching for paralogues
 #' @param delay How many seconds of delay should be between queries. Default is 10
 #' based on the robots.txt at the time this function is written.
 #'
 #' @return A data frame
 #' @export
 #'
-diopt = function(genes, inTax, outTax, delay = 10){
+diopt = function(genes, inTax, outTax = NULL, paralogue = FALSE, delay = 10){
     # rtxt = robotstxt::robotstxt(domain = "flyrnai.org")
     # delay = rtxt$crawl_delay %>% filter(useragent =='*') %$% value %>% as.integer()
     session = rvest::session('https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl')
     # session = rvest::html_session('https://www.flyrnai.org/cgi-bin/DRSC_orthologs.pl', httr::config(ssl_verifypeer = 0L))
     form = rvest::html_form(session)[[1]]
     
+    if(paralogue){
+        assertthat::assert_that(is.null(outTax),msg = 'outTax cannot be specified when querying paralogues')
+        form$fields[[1]]$attr$class = "btn btn-outline-primary"
+        form$fields[[2]]$attr$class = "btn btn-outline-primary active"
+        outTax = "9606"
+    } else{
+        assertthat::assert_that(!is.null(outTax),msg = 'outTax must be specified when querying orthologues')
+        acceptableOutTax = form$fields$output_species$options
+        assertthat::assert_that(outTax %in% acceptableOutTax)
+    }
+    
     acceptableInTax= form$fields$input_species$options
-    acceptableOutTax = form$fields$output_species$options
     
     assertthat::assert_that(inTax %in% acceptableInTax)
-    assertthat::assert_that(outTax %in% acceptableOutTax)
     
     form = rvest::html_form_set(form,
                              input_species = inTax,
